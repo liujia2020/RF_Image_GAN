@@ -1,114 +1,153 @@
-# CGAN_PLAN
+# cGAN 方案计划
 
-Last updated: 2026-06-05 01:17:55 +08:00
+最后更新：2026-06-05 01:57:34 +08:00
 
-## 1) Current Verdict
+## 1. 当前判决
 
-The regression line is frozen as a negative result. WideDeep+SSIM+crop8 improved proxy metrics, but NIfTI + 3D Slicer human review rejected it: phantom line targets were lost and tissue speckle became mush-like. The project now pivots to a paired conditional GAN family.
+原来的回归路线已经冻结为负结果。WideDeep + SSIM + crop8 虽然改善了 slope、p99、abs_std、SSIM 等代理指标，但导出 NIfTI 后经 3D Slicer 人眼检查失败：phantom 线靶在预测中丢失，组织 speckle 形态变成均值回归式的 mush。
 
-This document is a planning record only. It does not authorize training by itself.
+因此项目从“纯回归拟合 DAS”转向“成对 conditional GAN”。本文只是计划文档，不代表已经允许正式训练。
 
-## 2) Goal
+## 2. 最终目标
 
-Use a neural network to map delay-aligned multi-angle RF tensors directly to an image-quality output comparable to DAS, including realistic tissue/phantom speckle and preserved coherent structures.
+目标不是刷代理指标，而是让神经网络从 delay-aligned 多角度 RF tensor 直接重建出质量对标 DAS 的复数 RF volume。输出必须同时满足：
 
-The target is not "better proxy metrics"; the target is visual and quantitative agreement with DAS under the validation gate in `docs/VALIDATION_PROTOCOL.md`. Required speckle statistics are defined in VALIDATION_PROTOCOL Section 4: speckle SNR (vs label-measured in same ROI), envelope histogram KS statistic, and 2D speckle autocorrelation. These are mandatory output artifacts for every formal run.
+- 组织和仿体 speckle 形态接近 DAS。
+- 血管壁、组织界面、仿体结构等相干结构不能丢。
+- 点靶/线靶如果在 label 中可见，预测中也不能消失。
+- 完整 volume 拼接后不能出现 patch-grid 周期缝。
 
-## 3) Why Conditional Paired GAN
+任何“质量达标”结论都必须走 `docs/VALIDATION_PROTOCOL.md` 的验证关卡。Codex 只能产出材料和数字，不能替代用户做 Slicer 视觉签收。
 
-The dataset is paired: RF input corresponds to a DAS label. That makes a conditional paired GAN the appropriate family:
+## 3. 为什么是成对 conditional GAN
 
-- The generator is conditioned on RF input and optionally baseline.
-- The discriminator judges whether an output is DAS-like under the same condition.
-- Fidelity losses keep the output bound to this RF frame and prevent hallucination.
+我们有成对数据：RF 输入和对应 DAS label。因此正确的生成式家族是 paired conditional GAN：
 
-Unconditional GAN is not reconstruction. CycleGAN discards paired supervision and is only a fallback when paired data do not exist.
+- 生成器 G 以 RF input 作为条件，必要时也接收 baseline。
+- 判别器 D 判断“在同一个条件下，这个输出像不像 DAS”。
+- 保真项约束 G 不要脱离当前 RF frame，避免幻觉。
+- 对抗项负责逼出真实 speckle 分布。
 
-## 4) First-Phase Scope
+不用无条件 GAN，因为它只会生成“看起来像 DAS”的随机样本，不绑定这份 RF。也不用 CycleGAN，因为我们有配对监督，没必要丢掉最强信号。
 
-Primary scope:
+## 4. 第一阶段范围
 
-- Tissue and phantom realistic speckle.
-- Paired RF-to-DAS reconstruction.
-- Full-volume stitch compatibility.
-- Validation-gate artifacts: NIfTI, standard metrics, fixed comparison figures.
+第一阶段只做最小可行 cGAN 路线：
 
-Out of first-phase scope:
+- 主攻 tissue/phantom 的真实 speckle。
+- 保持 paired RF-to-DAS 重建设定。
+- 保持完整 volume stitch 可验证。
+- 每个正式 run 必须产出 NIfTI、标准指标、固定对比图、verdict。
 
-- `simu_point` as a main training class.
-- Diffusion models, because 3D volume training on local 8GB GPU is not practical now.
-- Any claim of quality pass without human Slicer review.
+暂不作为第一阶段主目标：
 
-Point targets remain a sanity check and later branch, not the first GAN objective.
+- `simu_point` 点靶数据作为主要训练类。
+- 扩散模型。原因是 3D volume + 本地 8GB GPU 目前不现实。
+- 任何不经 Slicer 的质量结论。
 
-## 5) Reusable Assets From Regression Line
+点靶仍是 sanity check 和后续分支，不是第一轮 GAN 的主攻对象。
 
-Keep and reuse:
+## 5. 从回归线继承的可复用资产
 
-- `RFLearningDataset`, `RFCachedDataset`, and cache builder logic.
-- BN normalization lesson and startup self-check discipline.
-- Stitching, crop8/halo, coverage checks.
-- NIfTI export and validation-gate discipline.
-- Regression checkpoints as baselines and negative-result evidence.
+继续复用：
 
-Do not reuse as final objective:
+- `RFLearningDataset`、`RFCachedDataset`、cache builder 思路。
+- BatchNorm 修复缝根因 #1 的经验。
+- startup check 和配置自检纪律。
+- crop8/halo、coverage check、full-volume stitch 管线。
+- NIfTI 导出和验证关卡。
+- 回归 checkpoint 作为 baseline 和负结果证据。
 
-- Pure L1/SSIM regression as the main training paradigm.
-- Proxy-metric-only acceptance.
+不要继续作为最终目标：
 
-## 6) Candidate Architecture Questions
+- 纯 L1/SSIM 回归。
+- 只看 slope、p99、SSIM、abs_std 等代理指标就判质量。
 
-Generator candidates:
+## 6. 架构候选
 
-- Start from a conservative residual RF-to-complex generator.
-- Keep shape contract: `input [B,1536,Z,X,Y]`, `baseline [B,2,Z,X,Y]`, output `[B,2,Z,X,Y]`.
-- Use AMP and small batch first; local smoke tests only.
+### 生成器 G
 
-Discriminator candidates:
+第一版先保守：
 
-- PatchGAN-style discriminator on envelope or dB envelope.
-- Conditional discriminator that receives baseline/envelope or low-channel condition, not full 1536 RF at first.
-- Consider 2D-slice discriminator first for memory, then 3D patch discriminator if feasible.
+- 输入：`input [B,1536,Z,X,Y]`。
+- 可选条件：`baseline [B,2,Z,X,Y]`。
+- 输出：`pred [B,2,Z,X,Y]`。
+- 本地先用小 batch + AMP 做 smoke test。
 
-Loss candidates:
+后续可以尝试更大 generator，但必须先过 smoke，再做 pilot。
 
-- Fidelity: complex L1 and/or envelope L1. Do NOT add SSIM. SSIM's covariance term requires pred and label speckle patterns to correlate, which is impossible for random speckle; it pulls G toward the conditional mean exactly like L1 regression.
+### 判别器 D
 
-- Fidelity target decomposition (critical): voxel-wise L1/complex constrains every voxel including the random speckle component, which G cannot predict exactly; this forces G toward the conditional mean (mush). The correct design is to restrict fidelity to deterministic/learnable components only:
-  - Coherent structures: vessel walls, tissue interfaces, phantom structures.
-  - Low-frequency envelope trend (large-scale echo level).
-  - Point/line target positions when present.
-  Fine-scale random speckle must be left to the adversarial term, not constrained by fidelity. Tuning lambda alone cannot resolve this; the decomposition of what fidelity acts on is the primary design variable.
+第一版为了省显存，先用 2D envelope PatchGAN：
 
-- Adversarial: hinge GAN or LSGAN, chosen for stability.
-- Feature matching if discriminator instability appears.
-- No quality claim until validation gate passes.
+- 从复数 volume 取 envelope。
+- 取中间 y 切片，得到 `[B,1,Z,X]`。
+- D 接收 candidate envelope 和 baseline envelope 拼接后的 `[B,2,Z,X]`。
 
-## 7) Training Risk Register
+如果 2D D 稳定，再考虑：
 
-Risks are ordered by probability for a paired conditional GAN with fidelity loss. Mode collapse probability is low because paired supervision prevents G from ignoring the RF condition.
+- 多切片 D。
+- 3D patch D。
+- 多尺度 D。
 
-1. Fidelity too strong -> mush (highest risk).
-   Detection: G_adv loss stagnates near its initial value and G has no incentive to improve adversarially; speckle SNR stays well above label-measured ROI SNR; envelope histogram KS does not decrease over training.
+## 7. 损失设计原则
 
-2. Hallucination: realistic speckle but wrong coherent structure.
-   Detection: structural correlation (pred vs label on low-pass envelope) degrades relative to BN regression baseline; point/line targets visible in label disappear in pred.
+第一版 smoke test 使用：
 
-3. Speckle realism improves while structural fidelity falls.
-   Detection: speckle SNR approaches label value but voxel-wise complex L1 vs baseline degrades beyond acceptable structural loss (VALIDATION_PROTOCOL acceptance criteria). Note: some voxel-wise L1 degradation relative to the mush baseline is expected and acceptable when speckle becomes realistic.
+```text
+G_loss = adversarial_loss + lambda_fidelity * complex_L1
+```
 
-4. Patch-level smoke-test success but stitch/full-volume failure.
-   Detection: seam metrics (amplitude and texture) must be measured on a stitched volume, not on patch-level metrics alone.
+注意：正式方案不能简单把 voxel-wise L1/SSIM 加大。原因是：
 
-5. Proxy metrics improve while human review fails (inherited from regression line).
-   Detection: validation gate in VALIDATION_PROTOCOL is the only arbiter.
+- 随机 speckle 无法逐 voxel 精确预测。
+- 对随机 speckle 做强 L1，会把 G 拉向条件均值，重新产生 mush。
+- SSIM 的协方差项要求 pred 与 label speckle 相关，这对随机 speckle 不合理，也会把结果拉向均值。
 
-Every run must record detection signals per risk in its `verdict.md`.
+正确方向是分解保真目标：
 
-## 8) Next Actions Before Any Training
+- 对确定性/可学习部分施加强保真：血管壁、组织界面、仿体结构、大尺度 envelope trend、点/线靶位置。
+- 对 fine-scale 随机 speckle 主要交给对抗项匹配分布。
 
-1. Finalize `docs/RUNBOOK.md`.
-2. Create the cGAN experiment folder and templates.
-3. Audit current code for reusable modules and files that must not be moved.
-4. Only after review, write a minimal cGAN smoke-test implementation.
-5. Smoke test is not a formal experiment and must not be interpreted as quality progress. Smoke test has exactly one pass criterion: the training loop runs without NaN, OOM, or D_loss collapse AND both G_adv and D losses are non-trivially moving in the first 20 epochs (neither single-sided convergence to zero). All other observations during smoke test are informational only. Smoke test result must not trigger the validation gate.
+因此，lambda 只是次要变量；“保真项到底作用在什么成分上”才是核心设计变量。
+
+## 8. 风险清单
+
+按当前 cGAN 设定，最可能的问题依次是：
+
+1. 保真项太强，输出回到 mush。
+   - 信号：G_adv 不动，speckle SNR 仍偏离 label，histogram/KS 不改善。
+
+2. 生成真实 speckle 但结构错位或幻觉。
+   - 信号：low-pass envelope 与 label 的结构相关性低于 BN baseline；label 中可见结构在 pred 中消失。
+
+3. speckle 变真实，但结构保真下降。
+   - 信号：speckle 指标接近 label，但 vessel wall/phantom structure 被破坏。
+
+4. patch 级看起来正常，full-volume stitch 失败。
+   - 信号：完整 volume 上 amplitude seam 或 texture seam 变差。
+
+5. 代理指标改善但人眼失败。
+   - 这是回归线已经发生过的事故。验证关卡是唯一仲裁。
+
+每个正式 run 的 `verdict.md` 必须逐条记录这些风险的检测结果。
+
+## 9. 当前 smoke test
+
+当前已建立最小 smoke run：
+
+```text
+experiments/cgan_v1/runs/2026-06-05_smoke/
+```
+
+目的只是一件事：确认 cGAN 训练环路在本地 GPU 上能跑通，不 NaN、不 OOM、不发生单边崩溃。
+
+它不是正式实验，不评价图像质量，也不触发验证关卡。
+
+## 10. 下一步
+
+1. 根据 smoke test 结果决定是否进入 pilot。
+2. pilot 前先制定类别均衡采样策略。
+3. 设计正式 generator/discriminator/loss 版本。
+4. 每个正式 run 都必须按 `RUNBOOK.md` 建 run folder，冻结 config。
+5. 每个正式质量结论都必须按 `VALIDATION_PROTOCOL.md` 输出 NIfTI 和标准指标，并由用户做 Slicer 签收。

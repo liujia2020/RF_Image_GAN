@@ -1,16 +1,16 @@
-# RUNBOOK
+# 实验运行手册
 
-Last updated: 2026-06-04 21:32:24 +08:00
+最后更新：2026-06-05 01:57:34 +08:00
 
-## 1) Purpose
+## 1. 目的
 
-This runbook defines how RF-to-volume experiments are created, recorded, reviewed, and closed. It is designed for both human review and AI-assisted project continuity.
+本手册规定 RF-to-volume / cGAN 实验如何创建、记录、审核和关闭。它同时服务于人类阅读和 AI 接力。
 
-No formal training run should start without a run folder and frozen config.
+正式训练 run 不能临时开跑。必须先有 run folder 和冻结 config。
 
-## 2) Run Folder Standard
+## 2. run folder 标准
 
-Each formal run gets one folder:
+每个正式 run 一个独立文件夹：
 
 ```text
 experiments/<track>/runs/<YYYY-MM-DD_short_name>/
@@ -27,100 +27,121 @@ experiments/<track>/runs/<YYYY-MM-DD_short_name>/
   verdict.md
 ```
 
-Large binary artifacts may live outside git, but paths must be recorded.
+大体积二进制文件可以放在 git 外，但路径必须写进 `run_manifest.json` 和 `README.md`。
 
-## 3) Required Files
+## 3. 文件职责
 
-`README.md`:
+`README.md`：
 
-- Why this run exists.
-- One-variable hypothesis.
-- Expected outcome.
-- Final status.
+- 为什么要做这个 run。
+- 单变量假设是什么。
+- 预期看到什么结果。
+- 当前状态和最终状态。
 
-`config.yaml`:
+`config.yaml`：
 
-- The frozen source of truth for training.
-- If it changes after training starts, create a new run.
+- 训练配置的唯一事实来源。
+- 一旦训练开始，config 不允许原地改；要改就新建 run。
 
-`run_manifest.json`:
+`run_manifest.json`：
 
-- timestamp
-- task name
-- git commit
-- dirty git status
-- config hash
-- dataset paths
-- checkpoint paths
-- Python/CUDA/GPU environment
+- 时间戳。
+- 任务名。
+- git commit。
+- git dirty status。
+- config hash。
+- dataset 路径。
+- checkpoint 路径。
+- Python / CUDA / GPU 环境。
 
-`train.ipynb`:
+`train.ipynb`：
 
-- Startup check.
-- Config printout.
-- Loss curves.
-- Notes on interruptions/OOM/restarts.
+- startup check。
+- 完整 config 打印。
+- loss 曲线或表格。
+- OOM、中断、恢复训练等情况。
 
-`validate.ipynb`:
+`validate.ipynb`：
 
-- NIfTI export.
-- Metric generation.
-- Figure generation.
-- Pointers to Slicer review materials.
+- NIfTI 导出。
+- 指标生成。
+- 固定对比图生成。
+- 指向 Slicer 材料的位置。
 
-`verdict.md`:
+`verdict.md`：
 
-- Human visual status.
-- Metric status.
-- Final decision.
-- What failed, if anything.
-- Next action.
+- 人眼视觉状态。
+- 指标状态。
+- 最终决定。
+- 失败原因。
+- 下一步动作。
 
-## 4) Lifecycle
+## 4. 生命周期
 
-1. Plan: write the run purpose and hypothesis.
-2. Freeze config: write `config.yaml`; record git state.
-3. Train: run only from the frozen config.
-4. Export materials: NIfTI, figures, metrics.
-5. Human review: user checks Slicer materials.
-6. Close: write `verdict.md`, update `EXPERIMENTS_LOG.md`, then commit.
+1. 计划：写清 run 目的和假设。
+2. 冻结配置：写 `config.yaml`，记录 git 状态。
+3. 训练：只从冻结 config 启动。
+4. 导出材料：NIfTI、figures、metrics。
+5. 人眼审查：用户在 Slicer 中检查。
+6. 收尾：写 `verdict.md`，更新 `EXPERIMENTS_LOG.md`，再 commit。
 
-## 5) Timestamp Rule
+## 5. 时间戳规则
 
-Every run and diagnostic output begins with:
+每个 run 或诊断脚本开头都要打印：
 
 ```text
 YYYY-MM-DD HH:MM:SS +08:00 | TASK: <task name>
 ```
 
-The same timestamp or generated timestamp must appear in `run_manifest.json`.
+同一个时间戳或生成时间戳必须写入 `run_manifest.json`。
 
-## 6) Failure Recording Rule
+## 6. 失败记录规则
 
-Failures are first-class results. Record:
+失败是一等结果，必须认真记录：
 
-- What was expected.
-- What actually happened.
-- How it was detected.
-- Whether it was metric-only, visual-only, or both.
-- Whether the result invalidates a hypothesis.
+- 原本期待什么。
+- 实际发生什么。
+- 如何发现的。
+- 是指标失败、视觉失败，还是两者都失败。
+- 是否推翻原假设。
 
-Do not dilute failures into vague "needs improvement" language.
+不要把失败写成模糊的“还需提升”。如果失败推翻了路线，就明确写。
 
-## 7) AI Role Boundary
+## 7. AI 角色边界
 
-Codex may:
+Codex 可以：
 
-- Generate code, configs, metrics, figures, NIfTI files, and summaries.
-- Point out risks or inconsistencies.
-- Propose interpretations with evidence.
+- 写代码、配置、notebook。
+- 跑指标、导图、导 NIfTI。
+- 汇总事实和指出风险。
 
-Codex may not:
+Codex 不可以：
 
-- Declare image quality pass without user Slicer review.
-- Treat proxy metrics as final quality.
-- Start a new formal training run without a run folder and frozen config.
+- 未经用户 Slicer 审查就宣布图像质量通过。
+- 把代理指标当最终质量。
+- 没有 run folder 和冻结 config 就启动正式训练。
 
-## 8) Commit Rule
+Claude / Claude Code 可以：
 
-One meaningful action, one commit. Commit messages must describe the actual change. Do not mix training code, docs, and large-output cleanup in one commit unless explicitly planned.
+- 做策略判断。
+- 审核方案和结果。
+- 给 Codex 下精确执行指令。
+
+Claude / Claude Code 不直接修改项目文件，除非用户显式改变角色分工。
+
+## 8. commit 规则
+
+一个有意义动作，一个 commit。commit message 必须准确描述实际改动。
+
+不要把训练代码、文档修正、大文件清理混在一个 commit，除非事先明确计划。
+
+## 9. smoke test 规则
+
+smoke test 不是正式实验。它只回答：
+
+- 能不能跑。
+- 是否 NaN。
+- 是否 OOM。
+- G/D 是否一边倒崩溃。
+
+smoke test 通过不代表图像质量进步，也不触发验证关卡。
