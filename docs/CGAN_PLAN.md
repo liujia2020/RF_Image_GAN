@@ -1,6 +1,6 @@
 # CGAN_PLAN
 
-Last updated: 2026-06-04 21:32:24 +08:00
+Last updated: 2026-06-05 01:17:55 +08:00
 
 ## 1) Current Verdict
 
@@ -12,7 +12,7 @@ This document is a planning record only. It does not authorize training by itsel
 
 Use a neural network to map delay-aligned multi-angle RF tensors directly to an image-quality output comparable to DAS, including realistic tissue/phantom speckle and preserved coherent structures.
 
-The target is not "better proxy metrics"; the target is visual and quantitative agreement with DAS under the validation gate in `docs/VALIDATION_PROTOCOL.md`.
+The target is not "better proxy metrics"; the target is visual and quantitative agreement with DAS under the validation gate in `docs/VALIDATION_PROTOCOL.md`. Required speckle statistics are defined in VALIDATION_PROTOCOL Section 4: speckle SNR (vs label-measured in same ROI), envelope histogram KS statistic, and 2D speckle autocorrelation. These are mandatory output artifacts for every formal run.
 
 ## 3) Why Conditional Paired GAN
 
@@ -72,20 +72,38 @@ Discriminator candidates:
 
 Loss candidates:
 
-- Fidelity: complex L1, envelope L1, possibly SSIM with small weight.
+- Fidelity: complex L1 and/or envelope L1. Do NOT add SSIM. SSIM's covariance term requires pred and label speckle patterns to correlate, which is impossible for random speckle; it pulls G toward the conditional mean exactly like L1 regression.
+
+- Fidelity target decomposition (critical): voxel-wise L1/complex constrains every voxel including the random speckle component, which G cannot predict exactly; this forces G toward the conditional mean (mush). The correct design is to restrict fidelity to deterministic/learnable components only:
+  - Coherent structures: vessel walls, tissue interfaces, phantom structures.
+  - Low-frequency envelope trend (large-scale echo level).
+  - Point/line target positions when present.
+  Fine-scale random speckle must be left to the adversarial term, not constrained by fidelity. Tuning lambda alone cannot resolve this; the decomposition of what fidelity acts on is the primary design variable.
+
 - Adversarial: hinge GAN or LSGAN, chosen for stability.
 - Feature matching if discriminator instability appears.
 - No quality claim until validation gate passes.
 
 ## 7) Training Risk Register
 
-- Mode collapse: discriminator wins or generator produces repeated texture.
-- Hallucination: realistic speckle but wrong coherent structure.
-- Speckle realism improves while DAS fidelity falls.
-- Patch-level success but stitch/full-volume failure.
-- Proxy metrics improve while human review fails.
+Risks are ordered by probability for a paired conditional GAN with fidelity loss. Mode collapse probability is low because paired supervision prevents G from ignoring the RF condition.
 
-Every run must record these risks in its `verdict.md`.
+1. Fidelity too strong -> mush (highest risk).
+   Detection: G_adv loss stagnates near its initial value and G has no incentive to improve adversarially; speckle SNR stays well above label-measured ROI SNR; envelope histogram KS does not decrease over training.
+
+2. Hallucination: realistic speckle but wrong coherent structure.
+   Detection: structural correlation (pred vs label on low-pass envelope) degrades relative to BN regression baseline; point/line targets visible in label disappear in pred.
+
+3. Speckle realism improves while structural fidelity falls.
+   Detection: speckle SNR approaches label value but voxel-wise complex L1 vs baseline degrades beyond acceptable structural loss (VALIDATION_PROTOCOL acceptance criteria). Note: some voxel-wise L1 degradation relative to the mush baseline is expected and acceptable when speckle becomes realistic.
+
+4. Patch-level smoke-test success but stitch/full-volume failure.
+   Detection: seam metrics (amplitude and texture) must be measured on a stitched volume, not on patch-level metrics alone.
+
+5. Proxy metrics improve while human review fails (inherited from regression line).
+   Detection: validation gate in VALIDATION_PROTOCOL is the only arbiter.
+
+Every run must record detection signals per risk in its `verdict.md`.
 
 ## 8) Next Actions Before Any Training
 
@@ -93,4 +111,4 @@ Every run must record these risks in its `verdict.md`.
 2. Create the cGAN experiment folder and templates.
 3. Audit current code for reusable modules and files that must not be moved.
 4. Only after review, write a minimal cGAN smoke-test implementation.
-5. Smoke test is not a formal experiment and must not be interpreted as quality progress.
+5. Smoke test is not a formal experiment and must not be interpreted as quality progress. Smoke test has exactly one pass criterion: the training loop runs without NaN, OOM, or D_loss collapse AND both G_adv and D losses are non-trivially moving in the first 20 epochs (neither single-sided convergence to zero). All other observations during smoke test are informational only. Smoke test result must not trigger the validation gate.
