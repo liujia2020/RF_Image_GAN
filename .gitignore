@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Large data and generated artifacts
+Data/
+Data_*/
+Data_cache*/
+RF_LearningSamples*/
+checkpoint/
+test_metrics/
+vis_best_model/
+outputs/
+_logs/
+_scratch/
+
+# Large binary formats
+*.pth
+*.pt
+*.npy
+*.npz
+*.dat
+*.h5
+*.hdf5
+*.mat
+*.nii
+*.nii.gz
+
+# Run artifacts normally kept out of git
+experiments/**/runs/*/logs/
+experiments/**/runs/*/nii/
+experiments/**/runs/*/checkpoints/
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+*.Zone.Identifier
