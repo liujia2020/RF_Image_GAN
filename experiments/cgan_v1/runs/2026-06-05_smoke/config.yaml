@@ -1,0 +1,40 @@
+run_name: 2026-06-05_smoke
+track: cgan_v1
+hypothesis: GAN training loop is stable (no NaN/OOM/single-sided collapse) over 20 epochs.
+status: smoke_test  # not a formal experiment
+
+data:
+  cache_dir: /home/liujia/RF_Image/Data_cache_random64_full1500
+  split: train
+  max_samples: 100  # smoke test uses first 100 patches only
+  legacy_code_dir: /home/liujia/RF_Image
+
+generator:
+  model_class: TinyResidualRFNet
+  use_bn: true
+  init: random  # cold start; do NOT load regression checkpoint
+
+discriminator:
+  model_class: Envelope2DPatchDiscriminator
+  ndf: 64
+
+loss:
+  type: lsgan  # MSE-based, real_target=1.0, fake_target=0.0
+  lambda_fidelity: 10.0  # strong fidelity for loop stability check only
+  fidelity_type: complex_l1  # no SSIM
+
+training:
+  epochs: 20
+  batch_size: 2
+  lr_G: 2.0e-4
+  lr_D: 2.0e-4
+  beta1: 0.5
+  beta2: 0.999
+  num_workers: 0  # WSL large-tensor IPC is fragile
+  use_amp: true
+  d_steps_per_g: 1
+
+logging:
+  snapshot_epochs: [5, 10, 15, 20]  # record D_real, D_fake, G_adv, G_fid
+  abort_on_nan: true
+  abort_if_d_fake_lt: 0.02  # D winning completely
