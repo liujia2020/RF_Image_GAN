@@ -2,6 +2,6 @@
   "run_name": "2026-06-05_pilot_phase1",
   "task": "cGAN pilot Phase 2a loss-design health check",
   "status": "training_enabled",
-  "frozen_design_commit": "PENDING_AFTER_EQUIVALENT_LOWPASS_OPTIMIZATION",
+  "frozen_design_commit": "05e87c6",
   "note": "The frozen design commit will contain rf_cgan_data.py, rf_cgan_losses.py, and config.yaml. The structural loss uses the mathematically equivalent LP(pred-label) form to avoid two Gaussian passes."
 }

@@ -61,6 +61,8 @@ training:
   beta1: 0.5
   beta2: 0.999
   num_workers: 0
+  cache_return_fp16: true
+  tensor_compute_dtype: fp32_after_h2d
   use_amp: true
   d_steps_per_g: 1
 
