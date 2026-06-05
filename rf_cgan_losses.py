@@ -121,7 +121,11 @@ def generator_lsgan_struct_carrier_loss(
 
     pred_env = complex_envelope(pred)
     label_env = complex_envelope(label)
-    struct = F.l1_loss(lowpass(pred_env), lowpass(label_env))
+    # Gaussian low-pass is linear, so LP(pred)-LP(label) == LP(pred-label).
+    # This preserves the configured structural objective while avoiding a
+    # second expensive 3D convolution pass.
+    struct_delta = lowpass(pred_env - label_env)
+    struct = torch.mean(torch.abs(struct_delta))
     carrier = F.l1_loss(pred, label)
     total = lambda_adv * adv + lambda_struct * struct + lambda_carrier * carrier
 
