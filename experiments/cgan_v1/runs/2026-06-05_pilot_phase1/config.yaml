@@ -1,0 +1,78 @@
+run_name: 2026-06-05_pilot_phase1
+track: cgan_v1
+status: phase2a_training_enabled
+hypothesis: >
+  Replace strong voxel-wise complex-L1 fidelity with low-pass envelope
+  structural fidelity plus weak carrier fidelity, while using adversarial
+  loss to learn fine speckle distribution.
+
+data:
+  cache_dir: /home/liujia/RF_Image/Data_cache_random64_full1500
+  train_split: train
+  val_split: val
+  test_split: test
+  legacy_code_dir: /home/liujia/RF_Image
+  categories: [carotid, muscle, phantom]
+
+sampler:
+  type: stratified_category_batch_sampler
+  samples_per_category: 1
+  effective_batch_size: 3
+  shuffle: true
+  seed: 20260605
+  purpose: keep carotid/muscle/phantom present in each batch so BatchNorm sees mixed categories
+
+generator:
+  model_class: TinyResidualRFNet
+  use_bn: true
+  init: random
+
+discriminator:
+  model_class: Envelope2DPatchDiscriminator
+  ndf: 64
+  input: [candidate_or_label_envelope_y_slice, baseline_envelope_y_slice]
+  y_slice: random_per_iteration
+
+loss:
+  type: lsgan_struct_carrier
+  lambda_adv: 1.0
+  lambda_struct: 10.0
+  lambda_carrier: 0.5
+  structural_term: L1(LP(env(pred)), LP(env(label)))
+  carrier_term: L1(pred, label)
+  lowpass:
+    type: anisotropic_gaussian_3d
+    sigma_voxels:
+      z: 6.0
+      x: 3.0
+      y: 3.0
+    truncate: 3.0
+
+training:
+  enabled: true
+  note: Phase 2a pilot training; loss-design health check only, no quality conclusion.
+  epochs: 50
+  snapshot_epochs: [10, 20, 25, 30, 40, 50]
+  checkpoint_epochs: [10, 20, 30, 40, 50]
+  batch_candidates: [6, 3]
+  min_batch_size: 3
+  lr_G: 2.0e-4
+  lr_D: 2.0e-4
+  beta1: 0.5
+  beta2: 0.999
+  num_workers: 0
+  use_amp: true
+  d_steps_per_g: 1
+
+diagnostics:
+  fixed_val_per_category: 8
+  fixed_val_seed: 20260605
+  speckle_hist_bins: 128
+  png_epochs: [10, 25, 50]
+
+validation_rois: {}
+
+outputs:
+  logs_dir: experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs
+  figures_dir: experiments/cgan_v1/runs/2026-06-05_pilot_phase1/figures
+  nii_dir: experiments/cgan_v1/runs/2026-06-05_pilot_phase1/nii

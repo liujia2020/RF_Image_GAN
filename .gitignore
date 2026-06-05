@@ -34,6 +34,7 @@ _scratch/
 
 # Run artifacts normally kept out of git
 experiments/**/runs/*/logs/
+experiments/**/runs/*/figures/
 experiments/**/runs/*/nii/
 experiments/**/runs/*/checkpoints/
 

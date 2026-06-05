@@ -1,0 +1,1 @@
+No checkpoints. Phase 1 is prepared-only; training is disabled.
