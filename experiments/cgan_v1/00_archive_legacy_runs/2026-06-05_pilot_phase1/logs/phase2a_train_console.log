@@ -1,0 +1,8 @@
+2026-06-05 10:41:13 +0800 | TASK: cGAN pilot Phase 2a training
+ACTUAL_BATCH_SIZE: 6 | dry_run_peak_mem_GB: 3.378
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:355: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:388: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:395: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):

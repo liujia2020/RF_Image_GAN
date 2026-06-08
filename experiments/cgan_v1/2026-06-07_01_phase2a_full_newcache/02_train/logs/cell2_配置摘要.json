@@ -1,0 +1,30 @@
+{
+  "run_name": "2026-06-07_01_phase2a_full_newcache",
+  "cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "epochs": 50,
+  "use_amp": false,
+  "num_workers": 0,
+  "loss": {
+    "type": "lsgan_struct_carrier",
+    "lambda_adv": 1.0,
+    "lambda_struct": 10.0,
+    "lambda_carrier": 0.5,
+    "lowpass": {
+      "type": "anisotropic_gaussian_3d",
+      "sigma_voxels": {
+        "z": 6.0,
+        "x": 3.0,
+        "y": 3.0
+      },
+      "truncate": 3.0
+    }
+  },
+  "sampler": {
+    "type": "stratified_category_batch_sampler",
+    "samples_per_category": 1,
+    "effective_batch_size": 3,
+    "shuffle": true,
+    "seed": 20260607,
+    "purpose": "keep carotid/muscle/phantom present in each batch for BatchNorm3d"
+  }
+}

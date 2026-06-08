@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-06-07 14:59:48 +0800",
+  "cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "use_amp": false,
+  "num_workers": 2,
+  "available_memory_gb": 52.60736846923828,
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "batch_stats": {
+    "input": {
+      "shape": [
+        3,
+        1536,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 10619.09375,
+      "mean": -0.020570022985339165,
+      "mean_abs": 261.2459716796875,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "label": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 21726.177734375,
+      "mean": -3.3417723178863525,
+      "mean_abs": 2217.3935546875,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "baseline": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 48332.2578125,
+      "mean": -5.262174606323242,
+      "mean_abs": 5183.76708984375,
+      "has_nan": false,
+      "has_inf": false
+    }
+  },
+  "status": "self_check_passed"
+}

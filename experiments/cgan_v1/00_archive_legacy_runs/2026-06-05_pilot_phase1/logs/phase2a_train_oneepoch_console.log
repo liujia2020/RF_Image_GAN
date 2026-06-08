@@ -1,0 +1,45 @@
+2026-06-05 10:53:19 +0800 | TASK: cGAN pilot Phase 2a training
+ACTUAL_BATCH_SIZE: 6 | dry_run_peak_mem_GB: 3.378
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:386: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+PHASE2A_EPOCH_OVERRIDE: 1
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:423: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):
+/home/liujia/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-05_pilot_phase1/logs/phase2a_train.py:430: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):
+FIRST_EPOCH_SECONDS: 279.398
+FIRST_EPOCH_PEAK_MEM_GB: 5.648
+ESTIMATED_50_EPOCH_HOURS: 0.078
+epoch 001/1 D_loss=0.1790 D_real=0.6648 D_fake=0.5709 G_adv=0.6131 G_struct=0.07255 G_carrier=0.19433 sec=279.4 peakGB=5.65
+# Phase 2a summary
+
+Generated: 2026-06-05 10:58:09 +0800
+
+## 1. NaN / collapse
+
+- aborted: None
+- completed_epochs: 1 / 1
+
+## 2. Batch / memory / timing
+
+- actual_batch_size: 6
+- dry_run_peak_mem_GB: 3.378
+- first_epoch_seconds: 279.398
+- first_epoch_peak_mem_GB: 5.648
+- total_seconds: 285.004
+
+## 3. Final fixed-val speckle check
+
+- carotid: pred_SNR=1.5447, label_SNR=1.6018, KS=0.0108
+- muscle: pred_SNR=1.5524, label_SNR=1.4842, KS=0.0351
+- phantom: pred_SNR=1.6411, label_SNR=1.7127, KS=0.0118
+
+## 4. Objective observation only
+
+This run is not a quality conclusion. Inspect the saved PNGs only as a loss-design health check.
+If pred_SNR stays far above label_SNR, the output is still smoother than label speckle. If it approaches label_SNR while KS decreases, the adversarial term is moving in the intended direction.
+
+## 5. Stitch capability report
+
+Full-volume stitch needs dense coverage patches, not random64 training patches. Random64_full1500 samples are sparse random positions and cannot tile a whole volume. Old RF_Image has rf_stitch.py, rf_stitch_vis.py, rf_export_stitched_to_nii.py, and dense64 generation/stitch artifacts. For cGAN full-volume validation, migrate or wrap the old dense64 extraction + rf_stitch.py path; do not attempt stitch from random64 cache.
+

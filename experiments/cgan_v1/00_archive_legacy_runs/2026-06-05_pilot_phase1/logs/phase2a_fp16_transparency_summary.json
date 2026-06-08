@@ -1,0 +1,17 @@
+{
+  "indices": [
+    0,
+    350,
+    700
+  ],
+  "categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "input_max_abs_diff_after_gpu_float": 0.0,
+  "label_max_abs_diff_after_gpu_float": 0.0,
+  "baseline_max_abs_diff_after_gpu_float": 0.0,
+  "max_term_abs_diff": 0.0,
+  "pass_threshold_1e-3": true
+}

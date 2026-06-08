@@ -1,0 +1,26 @@
+{
+  "run_name": "2026-06-08_02_phase2a_advstruct_v1",
+  "created_at": "2026-06-08 09:51:00 +0800",
+  "task": "Phase2a 正式训练：去掉 carrier，只保留 adv + normalized struct，损失设计健康检查，非质量验证",
+  "config_path": "01_config/config.yaml",
+  "dataset_paths": {
+    "train": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/train",
+    "val": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/val",
+    "test": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/test"
+  },
+  "python": "/home/liujia/miniconda3/envs/rf-cgan-clean/bin/python",
+  "torch": "2.11.0+cu128",
+  "amp": false,
+  "formal_quality_validation": false,
+  "loss_change": {
+    "lambda_adv": 1.0,
+    "lambda_struct": 1.0,
+    "lambda_carrier": 0.0,
+    "carrier_skipped_when_lambda_zero": true,
+    "struct_normalization": "s = mean(abs(env(label))) + 1e-8"
+  },
+  "notes": [
+    "本单元只报训练健康事实，不做 PASS/FAIL 或图像质量结论。",
+    "carrier 移除和 struct 归一化由 Proma 独立验收。"
+  ]
+}

@@ -1,0 +1,5 @@
+02_train/checkpoints/checkpoint_epoch010.pth
+02_train/checkpoints/checkpoint_epoch020.pth
+02_train/checkpoints/checkpoint_epoch030.pth
+02_train/checkpoints/checkpoint_epoch040.pth
+02_train/checkpoints/checkpoint_epoch050.pth

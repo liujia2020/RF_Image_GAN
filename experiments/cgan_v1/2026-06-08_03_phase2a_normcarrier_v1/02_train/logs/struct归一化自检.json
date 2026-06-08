@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-06-08 13:12:21 +0800",
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "y_idx": 24,
+  "scale_definition": {
+    "mode": "label_mean_envelope",
+    "eps": 1e-08,
+    "scale_definition": "s = mean(abs(env(label))) + eps",
+    "constraint": "pred and label share the same label-derived scalar scale"
+  },
+  "struct_old_unnormalized": 3466.09423828125,
+  "struct_new_normalized": 0.8106696605682373,
+  "struct_old_div_scale": 0.8106696849487279,
+  "abs_error_new_vs_old_div_scale": 2.4380490626363382e-08,
+  "relative_error_new_vs_old_div_scale": 3.007450639764008e-08,
+  "G_adv_weighted": 1.491142988204956,
+  "G_struct_weighted": 0.8106696605682373,
+  "carrier_old_unnormalized": 5318.32421875,
+  "carrier_new_normalized": 1.2438796758651733,
+  "carrier_old_div_scale": 1.2438796877626646,
+  "carrier_scale": 4275.59375,
+  "abs_error_carrier_new_vs_old_div_scale": 1.1897491214440947e-08,
+  "relative_error_carrier_new_vs_old_div_scale": 9.564824742689278e-09,
+  "G_carrier_weighted": 0.31096991896629333,
+  "G_carrier_skipped": 0.0,
+  "G_total": 2.6127824783325195,
+  "G_total_expected_adv_struct_carrier": 2.6127825677394867,
+  "G_total_abs_error_vs_components": 8.940696716308594e-08,
+  "pred_max_abs": 76592.8359375,
+  "has_nan": false,
+  "has_inf": false
+}

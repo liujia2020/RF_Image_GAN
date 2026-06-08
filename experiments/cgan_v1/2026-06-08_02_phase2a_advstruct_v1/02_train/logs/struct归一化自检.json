@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-06-08 10:00:04 +0800",
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "y_idx": 24,
+  "scale_definition": {
+    "mode": "label_mean_envelope",
+    "eps": 1e-08,
+    "scale_definition": "s = mean(abs(env(label))) + eps",
+    "constraint": "pred and label share the same label-derived scalar scale"
+  },
+  "struct_old_unnormalized": 3466.09423828125,
+  "struct_new_normalized": 0.8106696605682373,
+  "struct_old_div_scale": 0.8106696849487279,
+  "abs_error_new_vs_old_div_scale": 2.4380490626363382e-08,
+  "relative_error_new_vs_old_div_scale": 3.007450639764008e-08,
+  "G_adv_weighted": 1.491142988204956,
+  "G_struct_weighted": 0.8106696605682373,
+  "G_carrier_weighted": 0.0,
+  "G_carrier_skipped": 1.0,
+  "G_total": 2.3018126487731934,
+  "G_total_expected_adv_plus_struct": 2.3018126487731934,
+  "G_total_abs_error_vs_adv_plus_struct": 0.0,
+  "pred_max_abs": 76592.8359375,
+  "has_nan": false,
+  "has_inf": false
+}

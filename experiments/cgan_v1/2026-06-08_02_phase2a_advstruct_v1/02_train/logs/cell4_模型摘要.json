@@ -1,0 +1,6 @@
+{
+  "device": "cuda",
+  "G_params": 264738,
+  "D_params": 662721,
+  "G_first_norm": "BatchNorm3d"
+}

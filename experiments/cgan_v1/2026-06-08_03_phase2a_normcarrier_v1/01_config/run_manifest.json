@@ -1,0 +1,26 @@
+{
+  "run_name": "2026-06-08_03_phase2a_normcarrier_v1",
+  "created_at": "2026-06-08 13:08:00 +0800",
+  "task": "Phase2a 正式训练：carrier 归一化 + 三损失可比基线，非质量验证",
+  "config_path": "01_config/config.yaml",
+  "dataset_paths": {
+    "train": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/train",
+    "val": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/val",
+    "test": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/test"
+  },
+  "python": "/home/liujia/miniconda3/envs/rf-cgan-clean/bin/python",
+  "torch": "2.11.0+cu128",
+  "amp": false,
+  "formal_quality_validation": false,
+  "loss_change": {
+    "lambda_adv": 1.0,
+    "lambda_struct": 1.0,
+    "lambda_carrier": 0.25,
+    "struct_normalization": "s = mean(abs(env(label))) + 1e-8",
+    "carrier_normalization": "L1(pred / s, label / s), same s as struct"
+  },
+  "notes": [
+    "本单元只报训练健康事实，不做 PASS/FAIL 或图像质量结论。",
+    "carrier 归一化和三损失 O(1) 由 Proma 独立验收。"
+  ]
+}

@@ -9,6 +9,9 @@ from torch import nn
 
 from rf_cgan_models import extract_envelope_slice
 
+STRUCT_NORMALIZATION = "label_mean_envelope"
+STRUCT_NORMALIZATION_EPS = 1e-8
+
 
 def complex_envelope(volume: torch.Tensor, eps: float = 1e-12) -> torch.Tensor:
     """
@@ -121,21 +124,41 @@ def generator_lsgan_struct_carrier_loss(
 
     pred_env = complex_envelope(pred)
     label_env = complex_envelope(label)
-    # Gaussian low-pass is linear, so LP(pred)-LP(label) == LP(pred-label).
-    # This preserves the configured structural objective while avoiding a
-    # second expensive 3D convolution pass.
-    struct_delta = lowpass(pred_env - label_env)
+    # pred and label share one label-derived scalar scale. This is exactly
+    # equivalent to the previous structural term divided by scale, because
+    # Gaussian low-pass is linear: LP((pred-label)/s) == LP(pred-label)/s.
+    struct_scale = label_env.detach().abs().mean() + STRUCT_NORMALIZATION_EPS
+    struct_delta = lowpass((pred_env - label_env) / struct_scale)
     struct = torch.mean(torch.abs(struct_delta))
-    carrier = F.l1_loss(pred, label)
-    total = lambda_adv * adv + lambda_struct * struct + lambda_carrier * carrier
+    struct_unnormalized = struct * struct_scale
+    if float(lambda_carrier) == 0.0:
+        carrier = pred.detach().new_zeros(())
+        carrier_unnormalized = pred.detach().new_zeros(())
+        carrier_weighted = pred.detach().new_zeros(())
+        total = lambda_adv * adv + lambda_struct * struct
+        carrier_skipped = True
+    else:
+        # Carrier uses the same label-derived scalar as struct. This is
+        # exactly the previous complex L1 carrier divided by s:
+        # L1(pred/s, label/s) == L1(pred, label) / s.
+        carrier = F.l1_loss(pred / struct_scale, label / struct_scale)
+        carrier_unnormalized = carrier * struct_scale
+        carrier_weighted = lambda_carrier * carrier
+        total = lambda_adv * adv + lambda_struct * struct + lambda_carrier * carrier
+        carrier_skipped = False
 
     return total, {
         "g_adv_raw": adv.detach(),
         "g_struct_raw": struct.detach(),
+        "g_struct_unnormalized_raw": struct_unnormalized.detach(),
+        "g_struct_scale": struct_scale.detach(),
         "g_carrier_raw": carrier.detach(),
+        "g_carrier_unnormalized_raw": carrier_unnormalized.detach(),
+        "g_carrier_scale": struct_scale.detach(),
         "g_adv_weighted": (lambda_adv * adv).detach(),
         "g_struct_weighted": (lambda_struct * struct).detach(),
-        "g_carrier_weighted": (lambda_carrier * carrier).detach(),
+        "g_carrier_weighted": carrier_weighted.detach(),
         "g_total": total.detach(),
+        "g_carrier_skipped": torch.tensor(float(carrier_skipped), device=pred.device),
         "y_idx": torch.tensor(float(y_idx), device=pred.device),
     }

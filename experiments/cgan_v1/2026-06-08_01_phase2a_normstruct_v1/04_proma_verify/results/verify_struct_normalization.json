@@ -1,0 +1,63 @@
+{
+  "verified_at": "2026-06-08 02:15:00 +0800",
+  "verifier": "Proma (independent, read-only)",
+  "proposition": "struct normalization: struct_new == struct_old / s, same scale for pred and label",
+  "method": {
+    "data_source": "test split cache, 3 samples (carotid idx=0, muscle idx=75, phantom idx=150)",
+    "pred_source": "baseline (not label) — realistic inference scenario",
+    "code_inspected": "rf_cgan_losses.py lines 117-122",
+    "s_definition": "s = mean(abs(env(label))) + 1e-8",
+    "same_scale_check": "(pred_env - label_env) / s — single s applied to difference, not separate denominators"
+  },
+  "results": [
+    {
+      "category": "carotid",
+      "idx": 0,
+      "s": 6535.0229,
+      "struct_old": 9857.06054688,
+      "struct_old_div_s": 1.50834369659424,
+      "struct_new": 1.50834369659424,
+      "abs_diff": 0.0,
+      "rel_diff": 0.0
+    },
+    {
+      "category": "muscle",
+      "idx": 75,
+      "s": 603.3672,
+      "struct_old": 619.5980835,
+      "struct_old_div_s": 1.02690052986145,
+      "struct_new": 1.02690052986145,
+      "abs_diff": 0.0,
+      "rel_diff": 0.0
+    },
+    {
+      "category": "phantom",
+      "idx": 150,
+      "s": 1847.231,
+      "struct_old": 2047.25317383,
+      "struct_old_div_s": 1.10828220844269,
+      "struct_new": 1.1082820892334,
+      "abs_diff": 1.19e-07,
+      "rel_diff": 1.08e-07
+    }
+  ],
+  "struct_unnormalized_reconstruction": [
+    {"category": "carotid", "struct_old": 9857.06054688, "struct_new_times_s": 9857.06054688, "diff": 0.0},
+    {"category": "muscle", "struct_old": 619.5980835, "struct_new_times_s": 619.5980835, "diff": 0.0},
+    {"category": "phantom", "struct_old": 2047.25317383, "struct_new_times_s": 2047.25292969, "diff": 2.44e-04}
+  ],
+  "health": {
+    "struct_new_magnitude": "O(1): 1.03 ~ 1.51",
+    "nan_detected": false,
+    "inf_detected": false,
+    "s_positive": true,
+    "eps_safe": true,
+    "min_s": 603.37
+  },
+  "conclusion": {
+    "mathematical_equivalence": "CONFIRMED — struct_new == struct_old / s within float32 precision (max rel_diff 1.08e-07)",
+    "same_scale_constraint": "CONFIRMED — single s derived from label, applied to (pred-label) difference",
+    "magnitude_normalized": "CONFIRMED — struct_new O(1), down from O(10^4)",
+    "numerical_health": "CLEAN — no NaN, no Inf, s >> eps"
+  }
+}

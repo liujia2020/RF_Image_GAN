@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-06-07 13:54:41 +0800",
+  "status": "completed",
+  "config_path": "/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-07_smoke_phase2a_newcache/config.yaml",
+  "effective_cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "old_bad_cache_path_present": false,
+  "train_split_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/train",
+  "train_dataset_len": 1050,
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "batch_stats": {
+    "input": {
+      "shape": [
+        3,
+        1536,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 10823.3408203125,
+      "mean": -0.10544498264789581,
+      "mean_abs": 276.6238708496094,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    },
+    "label": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 41432.15234375,
+      "mean": -6.5082831382751465,
+      "mean_abs": 2720.784912109375,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    },
+    "baseline": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 76592.8359375,
+      "mean": -26.99090576171875,
+      "mean_abs": 5525.78662109375,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    }
+  },
+  "training_smoke": {
+    "device": "cuda",
+    "use_amp": false,
+    "iterations": [
+      {
+        "iteration": 1,
+        "y_idx": 24,
+        "D_real": 0.8384305834770203,
+        "D_fake": 0.11833339929580688,
+        "G_adv": 0.17991051077842712,
+        "G_struct": 3466.094482421875,
+        "G_carrier": 5318.32421875,
+        "G_total": 37320.2890625,
+        "pred_max_abs": 76592.8359375,
+        "has_nonfinite_loss": false
+      },
+      {
+        "iteration": 2,
+        "y_idx": 9,
+        "D_real": 0.37749969959259033,
+        "D_fake": 0.22806072235107422,
+        "G_adv": 0.34536251425743103,
+        "G_struct": 3466.09423828125,
+        "G_carrier": 5318.32373046875,
+        "G_total": 37320.4453125,
+        "pred_max_abs": 76592.8359375,
+        "has_nonfinite_loss": false
+      }
+    ],
+    "elapsed_sec": 7.765069246292114,
+    "peak_cuda_mem_gb": 2.7830724716186523
+  }
+}

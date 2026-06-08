@@ -1,0 +1,9 @@
+{
+  "run_name": "2026-06-07_smoke_phase2a_newcache",
+  "track": "cgan_v1",
+  "purpose": "Phase2a smoke on rebuilt normalized fp16 cache with reader-restored true amplitude",
+  "cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "created_by": "Codex",
+  "created_on": "2026-06-07",
+  "formal_training": false
+}

@@ -1,0 +1,90 @@
+/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-07_smoke_phase2a_newcache/logs/phase2a_newcache_smoke.py:149: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-07_smoke_phase2a_newcache/logs/phase2a_newcache_smoke.py:162: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):
+/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-07_smoke_phase2a_newcache/logs/phase2a_newcache_smoke.py:169: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=use_amp):
+{
+  "timestamp": "2026-06-07 13:46:12 +0800",
+  "status": "failed_nonfinite_loss",
+  "config_path": "/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/runs/2026-06-07_smoke_phase2a_newcache/config.yaml",
+  "effective_cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "old_bad_cache_path_present": false,
+  "train_split_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/train",
+  "train_dataset_len": 1050,
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "batch_stats": {
+    "input": {
+      "shape": [
+        3,
+        1536,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 10823.3408203125,
+      "mean": -0.10544498264789581,
+      "mean_abs": 276.6238708496094,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    },
+    "label": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 41432.15234375,
+      "mean": -6.5082831382751465,
+      "mean_abs": 2720.784912109375,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    },
+    "baseline": {
+      "shape": [
+        3,
+        2,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "max_abs": 76592.8359375,
+      "mean": -26.99090576171875,
+      "mean_abs": 5525.78662109375,
+      "has_nan": false,
+      "has_inf": false,
+      "finite_fraction": 1.0
+    }
+  },
+  "training_smoke": {
+    "device": "cuda",
+    "use_amp": true,
+    "iterations": [
+      {
+        "iteration": 1,
+        "y_idx": 24,
+        "D_real": 1.3160951137542725,
+        "D_fake": 0.09675396978855133,
+        "G_adv": 1.2688406705856323,
+        "G_struct": Infinity,
+        "G_carrier": 5318.32421875,
+        "G_total": Infinity,
+        "pred_max_abs": 76592.8359375,
+        "has_nonfinite_loss": true
+      }
+    ],
+    "elapsed_sec": 0.8357737064361572,
+    "peak_cuda_mem_gb": 2.5483083724975586
+  }
+}

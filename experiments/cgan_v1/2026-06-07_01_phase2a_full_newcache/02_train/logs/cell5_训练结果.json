@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-06-07 22:47:12 +0800",
+  "status": "completed",
+  "abort_reason": null,
+  "epochs_completed": 50,
+  "epochs_expected": 50,
+  "elapsed_sec": 26496.735916614532,
+  "last_stability": {
+    "epoch": 50,
+    "batches": 350,
+    "seconds": 534.6486856937408,
+    "peak_cuda_mem_gb": 2.6080875396728516,
+    "pred_max_abs": 280180.1875,
+    "has_nan": 0,
+    "has_inf": 0,
+    "available_memory_gb": 47.743743896484375,
+    "D_real": 0.001432613685465185,
+    "D_fake": 0.0026530648964814777,
+    "D_real_score": 0.7304820035185132,
+    "D_fake_score": 0.5006023549182075,
+    "D_loss": 0.0020428392849031036,
+    "G_adv_raw": 0.9993258147580283,
+    "G_struct_raw": 4313.523649204799,
+    "G_carrier_raw": 6110.774782366071,
+    "G_adv_weighted": 0.9993258147580283,
+    "G_struct_weighted": 43135.23649204799,
+    "G_carrier_weighted": 3055.3873911830356,
+    "G_total": 46191.62325753348
+  },
+  "checkpoints": [
+    "02_train/checkpoints/checkpoint_epoch010.pth",
+    "02_train/checkpoints/checkpoint_epoch020.pth",
+    "02_train/checkpoints/checkpoint_epoch030.pth",
+    "02_train/checkpoints/checkpoint_epoch040.pth",
+    "02_train/checkpoints/checkpoint_epoch050.pth"
+  ]
+}

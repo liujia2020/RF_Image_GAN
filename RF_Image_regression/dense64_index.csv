@@ -1,0 +1,14 @@
+category,source_file,file_id,patch_dir,disk,num_patches,size_gb
+carotid,Carotid_012.mat,RF000486,/mnt/f/DAS/RF_LearningSamples_dense_carotid_test_64x32x32/test/carotid,F:,256,97
+carotid,Carotid_073.mat,RF000487,/mnt/f/DAS/RF_dense64_carotid_RF000487/test/carotid,F:,256,97
+carotid,Carotid_042.mat,RF000488,/mnt/f/DAS/RF_dense64_carotid_RF000488/test/carotid,F:,256,97
+muscle,Muscle_056.mat,RF000386,/mnt/f/DAS/RF_dense64_muscle_RF000386/test/muscle,F:,256,97
+phantom,Phantom_036.mat,RF000587,/mnt/f/DAS/RF_dense64_phantom_RF000587/test/phantom,F:,256,97
+carotid,Carotid_008.mat,RF000489,/mnt/h/DAS/dense64/carotid/Carotid_008/test/carotid,H:,256,96.8
+carotid,Carotid_054.mat,RF000490,/mnt/h/DAS/dense64/carotid/Carotid_054/test/carotid,H:,256,96.8
+muscle,Muscle_077.mat,RF000388,/mnt/h/DAS/dense64/muscle/Muscle_077/test/muscle,H:,256,96.8
+muscle,Muscle_048.mat,RF000389,/mnt/h/DAS/dense64/muscle/Muscle_048/test/muscle,H:,256,96.8
+muscle,Muscle_061.mat,RF000390,/mnt/h/DAS/dense64/muscle/Muscle_061/test/muscle,H:,256,96.8
+phantom,Phantom_071.mat,RF000588,/mnt/h/DAS/dense64/phantom/Phantom_071/test/phantom,H:,256,96.8
+phantom,Phantom_077.mat,RF000589,/mnt/h/DAS/dense64/phantom/Phantom_077/test/phantom,H:,256,96.8
+phantom,Phantom_088.mat,RF000590,/mnt/h/DAS/dense64/phantom/Phantom_088/test/phantom,H:,256,96.8

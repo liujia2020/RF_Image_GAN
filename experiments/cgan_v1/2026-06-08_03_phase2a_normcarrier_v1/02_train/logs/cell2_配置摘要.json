@@ -1,0 +1,46 @@
+{
+  "run_name": "2026-06-08_03_phase2a_normcarrier_v1",
+  "cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "epochs": 50,
+  "use_amp": false,
+  "num_workers": 0,
+  "loss": {
+    "type": "lsgan_struct_carrier",
+    "lambda_adv": 1.0,
+    "lambda_struct": 1.0,
+    "lambda_carrier": 0.25,
+    "carrier": {
+      "enabled": true,
+      "normalization": {
+        "mode": "label_mean_envelope",
+        "eps": 1e-08,
+        "scale_definition": "same s as struct, s = mean(abs(env(label))) + eps",
+        "constraint": "pred and label share the same label-derived scalar scale"
+      },
+      "implementation": "L1(pred / s, label / s)"
+    },
+    "struct_normalization": {
+      "mode": "label_mean_envelope",
+      "eps": 1e-08,
+      "scale_definition": "s = mean(abs(env(label))) + eps",
+      "constraint": "pred and label share the same label-derived scalar scale"
+    },
+    "lowpass": {
+      "type": "anisotropic_gaussian_3d",
+      "sigma_voxels": {
+        "z": 6.0,
+        "x": 3.0,
+        "y": 3.0
+      },
+      "truncate": 3.0
+    }
+  },
+  "sampler": {
+    "type": "stratified_category_batch_sampler",
+    "samples_per_category": 1,
+    "effective_batch_size": 3,
+    "shuffle": true,
+    "seed": 20260607,
+    "purpose": "keep carotid/muscle/phantom present in each batch for BatchNorm3d"
+  }
+}

@@ -1,0 +1,2 @@
+device,batch_size,batch_categories,y_idx,g_adv_raw,g_struct_raw,g_carrier_raw,g_adv_weighted,g_struct_weighted,g_carrier_weighted,g_total,d_loss,d_real_score_sigmoid,d_fake_score_sigmoid,first_norm_class
+cuda,3,"carotid,muscle,phantom",8,0.8265625834465027,0.24083463847637177,0.32340750098228455,0.8265625834465027,2.40834641456604,0.32340750098228455,3.558316469192505,0.4764322340488434,0.5423202514648438,0.5435851216316223,BatchNorm3d

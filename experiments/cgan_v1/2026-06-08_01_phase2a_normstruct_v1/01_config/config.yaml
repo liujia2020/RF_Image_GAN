@@ -1,0 +1,94 @@
+run_name: 2026-06-08_01_phase2a_normstruct_v1
+track: cgan_v1
+status: completed_phase2a_normalized_struct_loss_health_check
+created_at: "2026-06-08 00:00:00 +0800"
+purpose: >
+  Phase2a formal loss-design health check with normalized structural loss.
+  This run does not make image-quality conclusions.
+
+data:
+  cache_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607
+  train_split: train
+  val_split: val
+  test_split: test
+  legacy_code_dir: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/RF_Image_regression
+  categories: [carotid, muscle, phantom]
+
+sampler:
+  type: stratified_category_batch_sampler
+  samples_per_category: 1
+  effective_batch_size: 3
+  shuffle: true
+  seed: 20260607
+  purpose: keep carotid/muscle/phantom present in each batch for BatchNorm3d
+
+generator:
+  model_class: TinyResidualRFNet
+  use_bn: true
+  init: random
+
+discriminator:
+  model_class: Envelope2DPatchDiscriminator
+  ndf: 64
+  input: [candidate_or_label_envelope_y_slice, baseline_envelope_y_slice]
+  y_slice: random_per_iteration
+
+loss:
+  type: lsgan_struct_carrier
+  lambda_adv: 1.0
+  lambda_struct: 1.0
+  lambda_carrier: 0.5
+  struct_normalization:
+    mode: label_mean_envelope
+    eps: 1.0e-8
+    scale_definition: s = mean(abs(env(label))) + eps
+    constraint: pred and label share the same label-derived scalar scale
+  lowpass:
+    type: anisotropic_gaussian_3d
+    sigma_voxels:
+      z: 6.0
+      x: 3.0
+      y: 3.0
+    truncate: 3.0
+
+training:
+  enabled: true
+  epochs: 50
+  snapshot_epochs: [10, 25, 50]
+  checkpoint_epochs: [10, 20, 30, 40, 50]
+  lr_G: 2.0e-4
+  lr_D: 2.0e-4
+  beta1: 0.5
+  beta2: 0.999
+  num_workers: 0
+  cache_return_fp16: true
+  restore_scale: true
+  tensor_compute_dtype: fp32_after_h2d
+  use_amp: false
+  d_steps_per_g: 1
+
+diagnostics:
+  fixed_val_per_category: 8
+  fixed_val_seed: 20260607
+  speckle_hist_bins: 128
+  png_epochs: [10, 25, 50]
+  probe_y_idx: 16
+  voxel_spacing_mm:
+    z: 0.0362
+    x: 0.2
+  report_pred_max_abs: true
+  stop_on_nonfinite_loss: true
+  min_available_memory_gb: 16.0
+
+safety:
+  expected_cache_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607
+  forbidden_cache_token: Data_cache_random64_full1500
+  expected_num_workers: 0
+
+outputs:
+  train_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/02_train
+  logs_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/02_train/logs
+  metrics_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/02_train/metrics
+  figures_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/02_train/figures
+  checkpoints_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/02_train/checkpoints
+  validate_dir: experiments/cgan_v1/runs/2026-06-08_01_phase2a_normstruct_v1/03_validate

@@ -1,0 +1,56 @@
+# Large generated datasets and caches
+Data/
+Data_1/
+Data_cache/
+Data_cache_random64_full1500/
+RF_LearningSamples_random64_pilot80/
+RF_LearningSamples_random64_full1500/
+RF_LearningSamples_dense*/
+*_cache*/
+_scratch/
+
+# Training outputs and generated artifacts
+checkpoint/
+test_metrics/
+vis_best_model/
+outputs/
+_logs/
+*.pth
+*.pt
+*.npy
+*.dat
+*.h5
+*.hdf5
+*.mat
+
+# Logs and temporary runtime files
+*.log
+*.out
+*.err
+*.pid
+*.diary
+*stdout.txt
+*stderr.txt
+*diary.txt
+random64_generation_*.txt
+MATLAB_dense_generation/*stdout.txt
+MATLAB_dense_generation/*stderr.txt
+MATLAB_dense_generation/*diary.txt
+MATLAB_dense_generation/*pid.txt
+
+# Python/Jupyter runtime noise
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+*.Zone.Identifier
+*.txt:Zone.Identifier
+
+# Local scratch notes not part of the project source
+fk.txt
+3darcgan.txt
+3darcgan*.txt
+新建文件夹/

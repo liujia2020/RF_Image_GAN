@@ -1,0 +1,41 @@
+# Phase2a 正式训练：normalized carrier v1
+
+创建时间：2026-06-08 13:08:00 +0800
+
+## 目的
+
+将 carrier 也按 label 派生的同一个尺度 `s` 归一化，使 adv、struct、carrier 三项都处于 O(1) 量级，建立损失量级可比的基线。
+
+本运行只做损失设计健康检查，不做图像质量结论。图像质量结论必须等待后续 NIfTI 导出与用户 3D Slicer 签收。
+
+## 关键前提
+
+- cache：`/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/`
+- reader 读 normalized cache 后执行 `fp16 -> fp32 -> 乘 scale`，进入网络前是真实幅值。
+- AMP 全程关闭：`use_amp=false`。
+- `num_workers=0`。
+- 损失权重：`lambda_adv=1.0`，`lambda_struct=1.0`，`lambda_carrier=0.25`。
+- struct 尺度：`s = mean(abs(env(label))) + 1e-8`。
+- carrier 复用同一个 `s`：`L1(pred / s, label / s)`。
+
+## 运行结构
+
+```text
+2026-06-08_03_phase2a_normcarrier_v1/
+├── 01_config/
+├── 02_train/
+├── 03_validate/
+└── 04_proma_verify/
+```
+
+## 执行入口
+
+正式结果必须由 notebook 一次性 Run All 产出：
+
+```bash
+PYTHONNOUSERSITE=1 /home/liujia/miniconda3/envs/rf-cgan-clean/bin/python -m nbconvert \
+  --execute --inplace \
+  --ExecutePreprocessor.timeout=-1 \
+  --ExecutePreprocessor.kernel_name=rf-cgan-clean \
+  train.ipynb
+```

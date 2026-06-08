@@ -1,0 +1,21 @@
+name: rf-cgan-clean
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - --ignore-installed
+      - torch==2.11.0+cu128
+      - torchvision==0.26.0+cu128
+      - torchaudio==2.11.0+cu128
+      - numpy==1.26.4
+      - h5py==3.16.0
+      - scipy==1.15.3
+      - pandas==2.3.3
+      - matplotlib==3.10.9
+      - nibabel==5.4.2
+      - PyYAML==6.0.3
+      - tqdm==4.67.3
+      - ipykernel==6.31.0

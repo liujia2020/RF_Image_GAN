@@ -1,0 +1,22 @@
+{
+  "run_name": "2026-06-07_01_phase2a_full_newcache",
+  "created_at": "2026-06-07 14:02:18 +0800",
+  "task": "Phase2a 正式训练：损失设计健康检查，非质量验证",
+  "git_commit": "9032b63",
+  "config_path": "01_config/config.yaml",
+  "dataset_paths": {
+    "train": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/train",
+    "val": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/val",
+    "test": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607/test"
+  },
+  "python": "/home/liujia/miniconda3/envs/rf-cgan-clean/bin/python",
+  "python_version": "3.10.20",
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 5060",
+  "amp": false,
+  "formal_quality_validation": false,
+  "notes": [
+    "正式运行目录按 docs/原则与规范/ 与 docs/Codex参考/执行规范.md 的三段式结构组织。",
+    "本单元只报训练健康事实，不做 PASS/FAIL 或图像质量结论。"
+  ]
+}
