@@ -1,0 +1,106 @@
+run_name: 2026-06-12_02_unet_adv_full_v1
+track: cgan_v1
+status: planned
+created_at: "2026-06-12 00:00:00 +0800"
+purpose: >
+  Formal 50-epoch B-mode adversarial run based on 2026-06-12_01_unet_adv_smoke_v1.
+  The only training-variable change versus smoke is epochs/snapshot/checkpoint
+  schedule. Extra diagnostics add measurement/output only.
+
+data:
+  rf_cache_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607
+  bmode_gt_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_bmode_gt_ref64407p58_20260610
+  train_split: train
+  val_split: val
+  test_split: test
+  categories: [carotid, muscle, phantom]
+  bmode_reference_value: 64407.58
+  bmode_eps: 1.0e-12
+  bmode_db_clip: [-60.0, 0.0]
+
+sampler:
+  type: stratified_category_batch_sampler
+  samples_per_category: 2
+  effective_batch_size: 6
+  shuffle: true
+  seed: 20260611
+
+generator:
+  model_class: Light3DUNet
+  basis: light 3D U-Net with anisotropic stride-conv downsampling
+  input_channels: 1536
+  output_channels: 1
+  use_bn: true
+  bn_momentum: 0.9
+  output_activation: sigmoid
+  baseline_used_by_model: false
+  init: kaiming_output_weight_bias_minus_2
+
+loss:
+  type: supervised_l1_ssim3d
+  lambda_ssim: 0.84
+  lambda_l1: 0.16
+  ssim:
+    library: pytorch-msssim
+    class: SSIM
+    spatial_dims: 3
+    scale: single
+    win_size: 7
+    win_sigma: 1.5
+    data_range: 1.0
+    channel: 1
+    nonnegative_ssim: true
+
+training:
+  enabled: true
+  epochs: 50
+  snapshot_epochs: [1, 10, 25, 50]
+  checkpoint_epochs: [1, 10, 25, 50]
+  lr: 2.0e-4
+  beta1: 0.5
+  beta2: 0.999
+  num_workers: 0
+  restore_input_scale: true
+  tensor_compute_dtype: fp32_after_h2d
+  use_amp: false
+
+adversarial:
+  enabled: true
+  discriminator_class: BMode3DPatchDiscriminator
+  lambda_adv: 0.1
+  opt_D:
+    lr: 2.0e-4
+    beta1: 0.5
+    beta2: 0.999
+  redlines:
+    min_epoch_for_flat_d: 2
+    flat_sigmoid_eps: 0.01
+    d_loss_collapse_threshold: 1.0e-4
+    g_adv_explosion_threshold: 10.0
+
+diagnostics:
+  fixed_val_per_category: 8
+  png_epochs: [10, 25, 50]
+  probe_y_idx: 16
+  voxel_spacing_mm:
+    z: 0.0362
+    x: 0.2
+  min_available_memory_gb: 16.0
+  stop_on_nonfinite_loss: true
+
+safety:
+  expected_rf_cache_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607
+  expected_bmode_gt_dir: /home/liujia/rf_training_cache/cgan_phase2a_64x32x32_bmode_gt_ref64407p58_20260610
+  forbidden_cache_token: Data_cache_random64_full1500
+  expected_num_workers: 0
+  expected_use_amp: false
+
+outputs:
+  run_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1
+  train_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train
+  logs_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/logs
+  metrics_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/metrics
+  figures_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/figures
+  checkpoints_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/checkpoints
+  validate_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/03_validate
+  proma_verify_dir: experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/04_proma_verify
