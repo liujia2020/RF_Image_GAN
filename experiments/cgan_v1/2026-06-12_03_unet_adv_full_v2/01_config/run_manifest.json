@@ -1,0 +1,13 @@
+{
+  "run_name": "2026-06-12_03_unet_adv_full_v2",
+  "work_unit": 22,
+  "created_at": "2026-06-13 00:00:00 +0800",
+  "objective": "Rerun the frozen B-mode adversarial mechanism for 50 epochs after changing only the flat-D redline basis from evalfixed to train-mode.",
+  "owner": {
+    "01_config": "Codex",
+    "02_train": "Codex",
+    "03_validate": "User",
+    "04_proma_verify": "Proma"
+  },
+  "quality_claim": "none"
+}
