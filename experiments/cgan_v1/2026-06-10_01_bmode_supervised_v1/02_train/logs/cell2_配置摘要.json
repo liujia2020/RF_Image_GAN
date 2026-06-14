@@ -1,0 +1,40 @@
+{
+  "run_name": "2026-06-10_01_bmode_supervised_v1",
+  "rf_cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "bmode_gt_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_bmode_gt_ref64407p58_20260610",
+  "epochs": 50,
+  "loss": {
+    "type": "supervised_l1_ssim3d",
+    "lambda_ssim": 0.84,
+    "lambda_l1": 0.16,
+    "ssim": {
+      "library": "pytorch-msssim",
+      "class": "SSIM",
+      "spatial_dims": 3,
+      "scale": "single",
+      "win_size": 7,
+      "win_sigma": 1.5,
+      "data_range": 1.0,
+      "channel": 1,
+      "nonnegative_ssim": true
+    }
+  },
+  "sampler": {
+    "type": "stratified_category_batch_sampler",
+    "samples_per_category": 1,
+    "effective_batch_size": 3,
+    "shuffle": true,
+    "seed": 20260610
+  },
+  "generator": {
+    "model_class": "TinyBModeRFNet",
+    "basis": "TinyResidualRFNet conv stack",
+    "input_channels": 1536,
+    "hidden_channels": 64,
+    "output_channels": 1,
+    "use_bn": true,
+    "output_activation": "sigmoid",
+    "baseline_used_by_model": false,
+    "init": "random_zero_last_layer"
+  }
+}

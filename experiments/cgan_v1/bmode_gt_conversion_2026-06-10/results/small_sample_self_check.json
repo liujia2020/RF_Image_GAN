@@ -1,0 +1,110 @@
+[
+  {
+    "split": "train",
+    "idx": 106,
+    "category": "carotid",
+    "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000422_carotid_train_patch002.h5",
+    "env_max": 258457.0625,
+    "env_mean": 24602.7578125,
+    "env_median": 18391.6474609375,
+    "ref": 64407.578125,
+    "bmode_min": 0.0,
+    "bmode_max": 1.0,
+    "bmode_mean": 0.8118724226951599,
+    "bmode_zero_fraction": 1.52587890625e-05,
+    "bmode_one_fraction": 0.052978515625,
+    "nan_count": 0,
+    "inf_count": 0,
+    "pixels_above_ref": 3472,
+    "pixels_above_ref_fraction": 0.052978515625,
+    "above_ref_all_clipped_to_one": true,
+    "manual_pixel_check": {
+      "zxy": [
+        36,
+        17,
+        30
+      ],
+      "env": 258457.0625,
+      "env_norm": 4.01283622244568,
+      "db_raw": 12.069028701085303,
+      "db_clipped": 0.0,
+      "bmode_manual": 1.0,
+      "bmode_array": 1.0,
+      "abs_error": 0.0
+    },
+    "db_min": -60.0,
+    "db_max": 0.0
+  },
+  {
+    "split": "train",
+    "idx": 599,
+    "category": "muscle",
+    "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000350_muscle_train_patch005.h5",
+    "env_max": 195005.453125,
+    "env_mean": 19747.357421875,
+    "env_median": 16620.9033203125,
+    "ref": 64407.578125,
+    "bmode_min": 0.08839619904756546,
+    "bmode_max": 1.0,
+    "bmode_mean": 0.7939071655273438,
+    "bmode_zero_fraction": 0.0,
+    "bmode_one_fraction": 0.0179290771484375,
+    "nan_count": 0,
+    "inf_count": 0,
+    "pixels_above_ref": 1175,
+    "pixels_above_ref_fraction": 0.0179290771484375,
+    "above_ref_all_clipped_to_one": true,
+    "manual_pixel_check": {
+      "zxy": [
+        62,
+        15,
+        5
+      ],
+      "env": 195005.453125,
+      "env_norm": 3.0276787111376886,
+      "db_raw": 9.622195742962408,
+      "db_clipped": 0.0,
+      "bmode_manual": 1.0,
+      "bmode_array": 1.0,
+      "abs_error": 0.0
+    },
+    "db_min": -54.69622802734375,
+    "db_max": 0.0
+  },
+  {
+    "split": "train",
+    "idx": 818,
+    "category": "phantom",
+    "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/phantom/RF000525_phantom_train_patch004.h5",
+    "env_max": 423.7638244628906,
+    "env_mean": 115.74272155761719,
+    "env_median": 108.28803253173828,
+    "ref": 64407.578125,
+    "bmode_min": 0.0,
+    "bmode_max": 0.27272897958755493,
+    "bmode_mean": 0.07700791954994202,
+    "bmode_zero_fraction": 0.2200775146484375,
+    "bmode_one_fraction": 0.0,
+    "nan_count": 0,
+    "inf_count": 0,
+    "pixels_above_ref": 0,
+    "pixels_above_ref_fraction": 0.0,
+    "above_ref_all_clipped_to_one": true,
+    "manual_pixel_check": {
+      "zxy": [
+        47,
+        21,
+        5
+      ],
+      "env": 423.7638244628906,
+      "env_norm": 0.006579409392485841,
+      "db_raw": -43.63626178930775,
+      "db_clipped": -43.63626178930775,
+      "bmode_manual": 0.27272897017820413,
+      "bmode_array": 0.27272897958755493,
+      "abs_error": 9.409350798517124e-09
+    },
+    "db_min": -60.0,
+    "db_max": -43.636260986328125
+  }
+]

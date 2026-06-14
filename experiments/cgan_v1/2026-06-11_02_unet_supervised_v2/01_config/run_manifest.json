@@ -1,0 +1,13 @@
+{
+  "run_name": "2026-06-11_02_unet_supervised_v2",
+  "work_unit": 19,
+  "created_at": "2026-06-11 00:00:00 +0800",
+  "objective": "Replace TinyBModeRFNet with Light3DUNet while keeping B-mode supervised data, loss, optimizer, AMP-off, and num_workers=0 unchanged.",
+  "owner": {
+    "01_config": "Codex",
+    "02_train": "Codex",
+    "03_validate": "User",
+    "04_proma_verify": "Proma"
+  },
+  "quality_claim": "none"
+}

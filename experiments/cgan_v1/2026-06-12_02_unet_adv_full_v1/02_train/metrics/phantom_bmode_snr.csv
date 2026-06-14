@@ -1,0 +1,4 @@
+epoch,space,category,pred_mean,pred_std,pred_mean_over_std,gt_mean,gt_std,gt_mean_over_std
+1,"B-mode log-compressed [0,1]; compare pred vs gt, not Rayleigh linear-envelope SNR",phantom,0.40121424198150635,0.01542733609676361,26.006709093455704,0.37705567479133606,0.09338207542896271,4.037773556169575
+10,"B-mode log-compressed [0,1]; compare pred vs gt, not Rayleigh linear-envelope SNR",phantom,0.3750501573085785,0.08016759157180786,4.678326365436082,0.37705567479133606,0.09338207542896271,4.037773556169575
+25,"B-mode log-compressed [0,1]; compare pred vs gt, not Rayleigh linear-envelope SNR",phantom,0.3773949146270752,0.09299200028181076,4.058358928502749,0.37705567479133606,0.09338207542896271,4.037773556169575

@@ -1,0 +1,13 @@
+{
+  "run_name": "2026-06-10_01_bmode_supervised_v1",
+  "work_unit": 18,
+  "created_at": "2026-06-10 00:00:00 +0800",
+  "objective": "Pure supervised B-mode baseline with single-channel sigmoid output and L1+3D-SSIM loss.",
+  "owner": {
+    "01_config": "Codex",
+    "02_train": "Codex",
+    "03_validate": "User",
+    "04_proma_verify": "Proma"
+  },
+  "quality_claim": "none"
+}

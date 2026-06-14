@@ -1,0 +1,71 @@
+{
+ "1_disc": {
+  "shape_in": [
+   2,
+   2,
+   64,
+   32,
+   32
+  ],
+  "shape_out": [
+   2,
+   1,
+   5,
+   1,
+   1
+  ],
+  "is_finite": true,
+  "params": 1493617,
+  "is_3d": true,
+  "out_channels": 1,
+  "no_final_sigmoid": true,
+  "verdict": "PASS"
+ },
+ "2_adv_sign": {
+  "toy_d_real_loss": 0.25,
+  "expected_d_real": 0.25,
+  "d_real_target_1_OK": true,
+  "toy_d_fake_loss": 0.25,
+  "expected_d_fake": 0.25,
+  "d_fake_target_0_OK": true,
+  "toy_d_loss": 0.25,
+  "toy_g_adv": 0.25,
+  "expected_g_adv": 0.25,
+  "g_adv_target_1_OK": true,
+  "pred_detached_for_D": true,
+  "g_adv_has_gradient": "tensor(True, device='cuda:0')",
+  "verdict": "PASS"
+ },
+ "3_sup_loss": {
+  "lambda_ssim": 0.84,
+  "lambda_l1": 0.16,
+  "ssim_spatial_dims": 3,
+  "ssim_win_size": 7,
+  "ssim_data_range": 1.0,
+  "ssim_channel": 1,
+  "verdict": "PASS"
+ },
+ "4_data_flow": {
+  "n_tested": 10,
+  "all_in_0_1": true,
+  "issues": [],
+  "verdict": "PASS"
+ },
+ "5_health": {
+  "proma_d_real_sigmoid": 0.6304866472880045,
+  "codex_d_real_sigmoid": 0.6649650274004255,
+  "d_real_delta": 0.03447838011242099,
+  "d_real_match": true,
+  "proma_d_fake_sigmoid": 0.5927703976631165,
+  "codex_d_fake_sigmoid": 0.5727582378046853,
+  "d_fake_delta": 0.02001215985843119,
+  "d_fake_match": true,
+  "proma_g_adv": 0.44183196624120075,
+  "codex_g_adv": 0.809751677257674,
+  "g_adv_delta": 0.3679197110164733,
+  "g_adv_match": "CAVEAT (see note)",
+  "samples_used": 3,
+  "verdict": "PASS (D_real/D_fake match; G_adv caveat — see note)"
+ },
+ "OVERALL": "PASS"
+}

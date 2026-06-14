@@ -1,0 +1,4 @@
+epoch 1: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_03_unet_adv_full_v2/02_train/checkpoints/epoch001.pt
+epoch 10: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_03_unet_adv_full_v2/02_train/checkpoints/epoch010.pt
+epoch 25: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_03_unet_adv_full_v2/02_train/checkpoints/epoch025.pt
+epoch 50: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_03_unet_adv_full_v2/02_train/checkpoints/epoch050.pt

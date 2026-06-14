@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C X:/RF_Image_GAN status --short --branch)",
+      "Bash(Select-Object -First 40)",
+      "Bash(git -C X:/RF_Image_GAN branch --show-current)",
+      "Bash(git -C X:/RF_Image_GAN status --short)"
+    ]
+  }
+}

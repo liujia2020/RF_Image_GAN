@@ -1,0 +1,229 @@
+{
+  "timestamp": "2026-06-11 14:17:56 +0800",
+  "rf_cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "bmode_gt_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_bmode_gt_ref64407p58_20260610",
+  "available_memory_gb": 52.187110900878906,
+  "use_amp": false,
+  "num_workers": 0,
+  "batch_categories": [
+    "carotid",
+    "carotid",
+    "muscle",
+    "muscle",
+    "phantom",
+    "phantom"
+  ],
+  "batch_category_counts": {
+    "carotid": 2,
+    "muscle": 2,
+    "phantom": 2
+  },
+  "batch_stats": {
+    "input": {
+      "shape": [
+        6,
+        1536,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": -9568.853515625,
+      "max": 10619.09375,
+      "mean": -0.035959914326667786,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "gt_bmode": {
+      "shape": [
+        6,
+        1,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": 0.0,
+      "max": 0.85205078125,
+      "mean": 0.5160481929779053,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "baseline_bmode": {
+      "shape": [
+        6,
+        1,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": 0.0,
+      "max": 0.9604097604751587,
+      "mean": 0.639708936214447,
+      "has_nan": false,
+      "has_inf": false
+    }
+  },
+  "model_class": "Light3DUNet",
+  "param_count": 2113889,
+  "bn_report": {
+    "bn_layers": 21,
+    "bn_running_mean_mean": 0.0,
+    "bn_running_var_mean": 1.0,
+    "bn_layers_detail": [
+      {
+        "name": "entry.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc1_down.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc1_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc1_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc2_down.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc2_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc2_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc3_down.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc3_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "enc3_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "bottleneck.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "bottleneck.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec3_up.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec3_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec3_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec2_up.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec2_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec2_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec1_up.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec1_conv.conv.1",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      },
+      {
+        "name": "dec1_conv.conv.4",
+        "running_mean_mean": 0.0,
+        "running_var_mean": 1.0
+      }
+    ]
+  },
+  "random_pred_stats": {
+    "shape": [
+      1,
+      1,
+      64,
+      32,
+      32
+    ],
+    "min": 0.028850510716438293,
+    "max": 0.8561618328094482,
+    "mean": 0.28050047159194946,
+    "std": 0.11753501743078232
+  },
+  "batch6_peak_cuda_mem_gb": 4.028371334075928,
+  "pred_stats": {
+    "shape": [
+      6,
+      1,
+      64,
+      32,
+      32
+    ],
+    "min": 0.017939383164048195,
+    "max": 0.9975403547286987,
+    "mean": 0.2637445628643036,
+    "std": 0.16063092648983002,
+    "has_nan": false,
+    "has_inf": false
+  },
+  "loss_probe": {
+    "loss": 0.8408268094062805,
+    "ssim": 0.05127982422709465,
+    "l1": 0.2743869423866272
+  },
+  "ssim_library": "pytorch-msssim",
+  "ssim_parameters": {
+    "library": "pytorch-msssim",
+    "class": "SSIM",
+    "spatial_dims": 3,
+    "scale": "single",
+    "win_size": 7,
+    "win_sigma": 1.5,
+    "data_range": 1.0,
+    "channel": 1,
+    "nonnegative_ssim": true
+  },
+  "status": "self_check_passed"
+}

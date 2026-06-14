@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "category": "phantom",
+    "non_dc_peak_over_median": 5.769884215909947,
+    "note": "Review spectrum image for discrete non-DC periodic peaks; numeric ratio is only a screening aid."
+  },
+  {
+    "epoch": 1,
+    "category": "muscle",
+    "non_dc_peak_over_median": 16.554859113726533,
+    "note": "Review spectrum image for discrete non-DC periodic peaks; numeric ratio is only a screening aid."
+  },
+  {
+    "epoch": 50,
+    "category": "phantom",
+    "non_dc_peak_over_median": 5.225977815564792,
+    "note": "Review spectrum image for discrete non-DC periodic peaks; numeric ratio is only a screening aid."
+  },
+  {
+    "epoch": 50,
+    "category": "muscle",
+    "non_dc_peak_over_median": 4.098041302186462,
+    "note": "Review spectrum image for discrete non-DC periodic peaks; numeric ratio is only a screening aid."
+  }
+]

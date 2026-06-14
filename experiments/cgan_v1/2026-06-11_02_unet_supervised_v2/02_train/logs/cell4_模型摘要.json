@@ -1,0 +1,22 @@
+{
+  "device": "cuda",
+  "G_params": 2113889,
+  "model_class": "Light3DUNet",
+  "output_activation": "sigmoid",
+  "baseline_used_by_model": false,
+  "bn_layers": 21,
+  "bn_running_mean_mean": 0.0,
+  "bn_running_var_mean": 1.0,
+  "ssim_library": "pytorch-msssim",
+  "ssim_parameters": {
+    "library": "pytorch-msssim",
+    "class": "SSIM",
+    "spatial_dims": 3,
+    "scale": "single",
+    "win_size": 7,
+    "win_sigma": 1.5,
+    "data_range": 1.0,
+    "channel": 1,
+    "nonnegative_ssim": true
+  }
+}

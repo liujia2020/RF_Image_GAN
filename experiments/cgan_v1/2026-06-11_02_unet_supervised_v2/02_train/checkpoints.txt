@@ -1,0 +1,6 @@
+epoch 1: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch001.pt
+epoch 10: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch010.pt
+epoch 20: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch020.pt
+epoch 30: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch030.pt
+epoch 40: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch040.pt
+epoch 50: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-11_02_unet_supervised_v2/02_train/checkpoints/epoch050.pt

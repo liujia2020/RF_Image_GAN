@@ -1,0 +1,77 @@
+{
+  "verified_at": "2026-06-08 16:29:00 +0800",
+  "verifier": "Proma (independent, read-only)",
+  "proposition": "carrier normalization: carrier_new = F.l1_loss(pred/s, label/s) == carrier_old / s; same s as struct; all three losses O(1)",
+  "method": {
+    "data_source": "test split cache, 3 samples (carotid idx=0, muscle idx=75, phantom idx=150)",
+    "pred_source": "baseline (realistic inference scenario)",
+    "code_inspected": "rf_cgan_losses.py lines 136-139",
+    "s_definition": "s = mean(abs(env(label))) + 1e-8 — same struct_scale used for both struct and carrier",
+    "carrier_formula": "carrier = F.l1_loss(pred / struct_scale, label / struct_scale)",
+    "skip_logic": "lambda_carrier == 0.0 -> carrier skipped (zeros, no gradient)"
+  },
+  "results_carrier_equivalence": [
+    {
+      "category": "carotid",
+      "idx": 0,
+      "s": 6535.0229,
+      "carrier_old": 11598.960,
+      "carrier_old_div_s": 1.774891972542,
+      "carrier_new": 1.774892091751,
+      "abs_diff": 1.19e-07,
+      "rel_diff": 6.72e-08
+    },
+    {
+      "category": "muscle",
+      "idx": 75,
+      "s": 603.3672,
+      "carrier_old": 860.625,
+      "carrier_old_div_s": 1.426370263100,
+      "carrier_new": 1.426370263100,
+      "abs_diff": 0.0,
+      "rel_diff": 0.0
+    },
+    {
+      "category": "phantom",
+      "idx": 150,
+      "s": 1847.231,
+      "carrier_old": 2662.489,
+      "carrier_old_div_s": 1.441340804100,
+      "carrier_new": 1.441340684891,
+      "abs_diff": 1.19e-07,
+      "rel_diff": 8.27e-08
+    }
+  ],
+  "results_carrier_reconstruction": [
+    {"category": "carotid", "carrier_old": 11598.960, "carrier_new_times_s": 11598.961, "diff": 9.77e-04},
+    {"category": "muscle", "carrier_old": 860.625, "carrier_new_times_s": 860.625, "diff": 0.0},
+    {"category": "phantom", "carrier_old": 2662.489, "carrier_new_times_s": 2662.489, "diff": 2.44e-04}
+  ],
+  "results_struct_still_intact": [
+    {"category": "carotid", "rel_diff": 1.28e-08},
+    {"category": "muscle", "rel_diff": 1.71e-09},
+    {"category": "phantom", "rel_diff": 9.25e-08}
+  ],
+  "results_three_loss_magnitudes": [
+    {"category": "carotid", "adv": "~1.0", "struct_w": 1.508, "carrier_w_x0.25": 0.444, "all_O1": true, "NaN": false},
+    {"category": "muscle", "adv": "~1.0", "struct_w": 1.027, "carrier_w_x0.25": 0.357, "all_O1": true, "NaN": false},
+    {"category": "phantom", "adv": "~1.0", "struct_w": 1.108, "carrier_w_x0.25": 0.360, "all_O1": true, "NaN": false}
+  ],
+  "same_scale_verification": {
+    "carrier_uses_struct_scale": "confirmed — code: carrier = F.l1_loss(pred / struct_scale, label / struct_scale)",
+    "g_carrier_scale_output": "struct_scale.detach() — same as g_struct_scale",
+    "not_per_sample_scale": "confirmed — single scalar from label_env, not separate pred_s and label_s"
+  },
+  "skip_logic_verification": {
+    "lambda_carrier_zero": "carrier = zeros(()), no gradient, carrier_skipped = True",
+    "lambda_carrier_nonzero": "carrier computed with normalization, carrier_skipped = False"
+  },
+  "conclusion": {
+    "carrier_equivalence": "CONFIRMED — carrier_new == carrier_old / s within float32 precision (max rel_diff 8.27e-08)",
+    "same_scale_constraint": "CONFIRMED — carrier uses same struct_scale, pred and label divided by same s",
+    "same_s_as_struct": "CONFIRMED — struct_scale = mean(|env(label)|) + 1e-8 applied to both struct and carrier",
+    "struct_not_broken": "CONFIRMED — struct normalization intact, max rel_diff 9.25e-08",
+    "three_losses_O1": "CONFIRMED — adv~1.0, struct~1.0-1.5, carrier(x0.25)~0.35-0.44, all NaN-free",
+    "no_single_term_dominates": "CONFIRMED — max ratio is struct:carrier ~ 4:1 (with lambda weights applied)"
+  }
+}

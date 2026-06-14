@@ -1,0 +1,19 @@
+{
+  "device": "cuda",
+  "G_params": 264705,
+  "model_class": "TinyBModeRFNet",
+  "output_activation": "sigmoid",
+  "baseline_used_by_model": false,
+  "ssim_library": "pytorch-msssim",
+  "ssim_parameters": {
+    "library": "pytorch-msssim",
+    "class": "SSIM",
+    "spatial_dims": 3,
+    "scale": "single",
+    "win_size": 7,
+    "win_sigma": 1.5,
+    "data_range": 1.0,
+    "channel": 1,
+    "nonnegative_ssim": true
+  }
+}

@@ -1,0 +1,3 @@
+epoch 1: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_01_unet_adv_smoke_v1/02_train/checkpoints/epoch001.pt
+epoch 5: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_01_unet_adv_smoke_v1/02_train/checkpoints/epoch005.pt
+epoch 10: /media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_01_unet_adv_smoke_v1/02_train/checkpoints/epoch010.pt

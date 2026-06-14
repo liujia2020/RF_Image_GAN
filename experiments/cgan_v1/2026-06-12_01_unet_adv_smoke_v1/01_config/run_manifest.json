@@ -1,0 +1,13 @@
+{
+  "run_name": "2026-06-12_01_unet_adv_smoke_v1",
+  "work_unit": 20,
+  "created_at": "2026-06-12 00:00:00 +0800",
+  "objective": "Add a lightweight 3D conditional B-mode PatchGAN and LSGAN loss to the frozen Light3DUNet supervised baseline for a 10-epoch smoke test.",
+  "owner": {
+    "01_config": "Codex",
+    "02_train": "Codex",
+    "03_validate": "User",
+    "04_proma_verify": "Proma"
+  },
+  "quality_claim": "none"
+}

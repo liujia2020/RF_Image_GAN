@@ -1,0 +1,305 @@
+{
+  "norm_config": {
+    "G": {
+      "type": "BatchNorm3d",
+      "count": 21,
+      "momentum": 0.9,
+      "track_running_stats": true,
+      "affine": true
+    },
+    "D": {
+      "type": "InstanceNorm3d",
+      "count": 2,
+      "track_running_stats": "N/A (IN has no running stats, train/eval identical)",
+      "affine": true,
+      "detail": [
+        {
+          "name": "net.3",
+          "type": "InstanceNorm3d",
+          "num_features": 96,
+          "affine": true,
+          "track_running_stats": false
+        },
+        {
+          "name": "net.6",
+          "type": "InstanceNorm3d",
+          "num_features": 192,
+          "affine": true,
+          "track_running_stats": false
+        }
+      ]
+    }
+  },
+  "bn_stats_evolution": {
+    "1": {
+      "running_mean_mean": -0.08360860561065021,
+      "running_var_mean": 12826.984571188688
+    },
+    "10": {
+      "running_mean_mean": -0.1947953588941822,
+      "running_var_mean": 20905.547631496476
+    },
+    "25": {
+      "running_mean_mean": -0.21734141930937767,
+      "running_var_mean": 30048.023590553374
+    },
+    "41": {
+      "running_mean_mean": -0.43997935205698013,
+      "running_var_mean": 36603.068255129314
+    },
+    "42": {
+      "running_mean_mean": -0.4827698655426502,
+      "running_var_mean": 36997.08928438028
+    }
+  },
+  "four_mode_cross_restored": {
+    "G.train + D.train": {
+      "D_real_sig": 0.6228,
+      "D_real_raw": 0.5155,
+      "D_fake_sig": 0.5934,
+      "D_fake_raw": 0.3906,
+      "D_loss": 0.3042,
+      "G_adv": 0.4881,
+      "pred_mean": 0.5135,
+      "pred_std": 0.1362
+    },
+    "G.train + D.eval ": {
+      "D_real_sig": 0.6228,
+      "D_real_raw": 0.5155,
+      "D_fake_sig": 0.5934,
+      "D_fake_raw": 0.3906,
+      "D_loss": 0.3042,
+      "G_adv": 0.4881,
+      "pred_mean": 0.5135,
+      "pred_std": 0.1362
+    },
+    "G.eval  + D.train": {
+      "D_real_sig": 0.6228,
+      "D_real_raw": 0.5155,
+      "D_fake_sig": 0.5907,
+      "D_fake_raw": 0.3793,
+      "D_loss": 0.3014,
+      "G_adv": 0.505,
+      "pred_mean": 0.4964,
+      "pred_std": 0.1346
+    },
+    "G.eval  + D.eval ": {
+      "D_real_sig": 0.6228,
+      "D_real_raw": 0.5155,
+      "D_fake_sig": 0.5907,
+      "D_fake_raw": 0.3793,
+      "D_loss": 0.3014,
+      "G_adv": 0.505,
+      "pred_mean": 0.4964,
+      "pred_std": 0.1346
+    }
+  },
+  "four_mode_cross_raw_baseline": {
+    "G.train + D.train": {
+      "D_real_sig": 0.4666,
+      "D_fake_sig": 0.4709
+    },
+    "G.train + D.eval ": {
+      "D_real_sig": 0.4666,
+      "D_fake_sig": 0.4709
+    },
+    "G.eval  + D.train": {
+      "D_real_sig": 0.4666,
+      "D_fake_sig": 0.4612
+    },
+    "G.eval  + D.eval ": {
+      "D_real_sig": 0.4666,
+      "D_fake_sig": 0.4612
+    }
+  },
+  "csv_epoch25_ref": {
+    "D_real_evalfixed": 0.6227778792381287,
+    "D_fake_evalfixed": 0.590667612850666,
+    "G_adv_evalfixed": 0.5050463043153286,
+    "val_pred_mean": 0.4963795579969883,
+    "val_pred_std": 0.12051227409392595,
+    "D_real_train": 0.6921763260023934,
+    "D_fake_train": 0.540758877652032,
+    "G_adv_train": 0.9473524260520935
+  },
+  "g_train_eval_diff": {
+    "L1_train_vs_eval": 0.0435,
+    "pred_mean_train": 0.5135,
+    "pred_mean_eval": 0.4964,
+    "pred_std_train": 0.1362,
+    "pred_std_eval": 0.1346
+  },
+  "bn_per_layer_e25": [
+    {
+      "name": "entry.1",
+      "running_mean_mean": -0.298,
+      "running_var_mean": 630911.38,
+      "running_var_max": 714408.19
+    },
+    {
+      "name": "enc1_down.1",
+      "running_mean_mean": -0.0319,
+      "running_var_mean": 1.04,
+      "running_var_max": 2.28
+    },
+    {
+      "name": "enc1_conv.conv.1",
+      "running_mean_mean": -0.7453,
+      "running_var_mean": 2.84,
+      "running_var_max": 5.62
+    },
+    {
+      "name": "enc1_conv.conv.4",
+      "running_mean_mean": -0.4522,
+      "running_var_mean": 3.07,
+      "running_var_max": 5.86
+    },
+    {
+      "name": "enc2_down.1",
+      "running_mean_mean": 0.4481,
+      "running_var_mean": 2.86,
+      "running_var_max": 7.27
+    },
+    {
+      "name": "enc2_conv.conv.1",
+      "running_mean_mean": 0.0676,
+      "running_var_mean": 5.01,
+      "running_var_max": 20.49
+    },
+    {
+      "name": "enc2_conv.conv.4",
+      "running_mean_mean": -0.2837,
+      "running_var_mean": 3.66,
+      "running_var_max": 14.31
+    },
+    {
+      "name": "enc3_down.1",
+      "running_mean_mean": 0.1429,
+      "running_var_mean": 2.58,
+      "running_var_max": 10.32
+    },
+    {
+      "name": "enc3_conv.conv.1",
+      "running_mean_mean": 0.6696,
+      "running_var_mean": 4.58,
+      "running_var_max": 25.41
+    },
+    {
+      "name": "enc3_conv.conv.4",
+      "running_mean_mean": 0.1428,
+      "running_var_mean": 4.35,
+      "running_var_max": 12.16
+    },
+    {
+      "name": "bottleneck.conv.1",
+      "running_mean_mean": -0.0011,
+      "running_var_mean": 3.13,
+      "running_var_max": 10.46
+    },
+    {
+      "name": "bottleneck.conv.4",
+      "running_mean_mean": -0.0215,
+      "running_var_mean": 1.67,
+      "running_var_max": 4.26
+    },
+    {
+      "name": "dec3_up.1",
+      "running_mean_mean": -0.3301,
+      "running_var_mean": 8.01,
+      "running_var_max": 22.22
+    },
+    {
+      "name": "dec3_conv.conv.1",
+      "running_mean_mean": -0.0113,
+      "running_var_mean": 3.08,
+      "running_var_max": 7.67
+    },
+    {
+      "name": "dec3_conv.conv.4",
+      "running_mean_mean": -0.2028,
+      "running_var_mean": 2.87,
+      "running_var_max": 8.82
+    },
+    {
+      "name": "dec2_up.1",
+      "running_mean_mean": -0.4513,
+      "running_var_mean": 13.25,
+      "running_var_max": 23.34
+    },
+    {
+      "name": "dec2_conv.conv.1",
+      "running_mean_mean": -0.4951,
+      "running_var_mean": 8.14,
+      "running_var_max": 17.42
+    },
+    {
+      "name": "dec2_conv.conv.4",
+      "running_mean_mean": -0.8118,
+      "running_var_mean": 15.58,
+      "running_var_max": 28.34
+    },
+    {
+      "name": "dec1_up.1",
+      "running_mean_mean": -0.5507,
+      "running_var_mean": 1.51,
+      "running_var_max": 6.87
+    },
+    {
+      "name": "dec1_conv.conv.1",
+      "running_mean_mean": -0.65,
+      "running_var_mean": 2.22,
+      "running_var_max": 5.82
+    },
+    {
+      "name": "dec1_conv.conv.4",
+      "running_mean_mean": -0.6983,
+      "running_var_mean": 7.68,
+      "running_var_max": 24.99
+    }
+  ],
+  "phantom_std_clarification": {
+    "epoch": 25,
+    "n_fixed_phantom": 8,
+    "G_eval_pred_mean": 0.4662,
+    "G_eval_pred_std": 0.1197,
+    "G_eval_mean_over_std": 3.89,
+    "G_train_pred_mean": 0.5127,
+    "G_train_pred_std": 0.114,
+    "G_train_mean_over_std": 4.5,
+    "csv_val_phantom_pred_std": 0.1021,
+    "csv_val_phantom_gt_std": 0.0958,
+    "summary_md_e25_phantom_pred_std": 0.093,
+    "summary_md_e25_phantom_gt_std": 0.093
+  },
+  "train_vs_eval_gap_trend": {
+    "train_gap": {
+      "1": 0.1045,
+      "10": 0.1136,
+      "25": 0.1514,
+      "42": 0.1798
+    },
+    "eval_gap": {
+      "1": 0.0952,
+      "10": 0.0831,
+      "25": 0.0321,
+      "42": -0.0103
+    }
+  },
+  "epoch42_csv_only": {
+    "note": "No e42 checkpoint saved (redline stopped before snapshot). Analysis from CSV only.",
+    "D_real_train": 0.706251277923584,
+    "D_fake_train": 0.5264259840760912,
+    "D_real_evalfixed": 0.4941737689077854,
+    "D_fake_evalfixed": 0.5044782795011997,
+    "D_loss_train": 0.08697898874325412,
+    "val_pred_std": 0.11453047208487988
+  },
+  "_meta": {
+    "timestamp": "2026-06-13 11:55:33 +0800",
+    "elapsed_seconds": 55.9,
+    "checkpoint": "epoch025.pt",
+    "n_evalfixed": 24,
+    "device": "cpu",
+    "v2_fix": "baseline_bmode now computed from RESTORED baseline complex (×scale before B-mode conversion), matching training pipeline. v1 used raw baseline, causing ~89dB shift in log space."
+  }
+}

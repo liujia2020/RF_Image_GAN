@@ -1,0 +1,306 @@
+{
+  "total_samples": 1500,
+  "total_pixels": 98304000,
+  "global_max": 258457.0625,
+  "global_mean": 4296.6298828125,
+  "global_percentiles": {
+    "50": 2346.3017578125,
+    "95": 14403.897509765622,
+    "99": 29847.332148437563,
+    "99.9": 64407.578179688426,
+    "99.99": 110524.12038202828
+  },
+  "by_category": {
+    "carotid": {
+      "samples": 500,
+      "pixels": 32768000,
+      "max": 258457.0625,
+      "p999": 78406.07814843755,
+      "p9999": 132442.0222531145,
+      "mean": 5731.7138671875,
+      "median": 3483.9635009765625
+    },
+    "muscle": {
+      "samples": 500,
+      "pixels": 32768000,
+      "max": 195005.453125,
+      "p999": 64736.29804297112,
+      "p9999": 101527.83448749688,
+      "mean": 5665.07080078125,
+      "median": 3669.5533447265625
+    },
+    "phantom": {
+      "samples": 500,
+      "pixels": 32768000,
+      "max": 64480.375,
+      "p999": 13838.904352539175,
+      "p9999": 38960.75474843581,
+      "mean": 1493.124267578125,
+      "median": 1106.5249633789062
+    }
+  },
+  "candidate_clip_fraction": {
+    "99.99": {
+      "reference": 110524.12038202828,
+      "pixels_above": 9831,
+      "fraction": 0.000100006103515625,
+      "percent": 0.0100006103515625
+    },
+    "99.9": {
+      "reference": 64407.578179688426,
+      "pixels_above": 98304,
+      "fraction": 0.001,
+      "percent": 0.1
+    },
+    "99": {
+      "reference": 29847.332148437563,
+      "pixels_above": 983040,
+      "fraction": 0.01,
+      "percent": 1.0
+    }
+  },
+  "top_samples_by_max": [
+    {
+      "split": "train",
+      "local_idx": 106,
+      "global_seen_idx": 106,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000422_carotid_train_patch002.h5",
+      "scale": 256493.84375,
+      "max": 258457.0625,
+      "p999": 205514.14406250144,
+      "mean": 24602.7578125,
+      "median": 18391.6474609375
+    },
+    {
+      "split": "train",
+      "local_idx": 43,
+      "global_seen_idx": 43,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000409_carotid_train_patch004.h5",
+      "scale": 235856.625,
+      "max": 253288.96875,
+      "p999": 196661.52710937674,
+      "mean": 33724.56640625,
+      "median": 24490.0517578125
+    },
+    {
+      "split": "test",
+      "local_idx": 33,
+      "global_seen_idx": 1308,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/test/carotid/RF000492_carotid_test_patch004.h5",
+      "scale": 240690.578125,
+      "max": 251112.46875,
+      "p999": 182480.4142968778,
+      "mean": 17958.04296875,
+      "median": 10243.91845703125
+    },
+    {
+      "split": "train",
+      "local_idx": 107,
+      "global_seen_idx": 107,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000422_carotid_train_patch003.h5",
+      "scale": 224944.5625,
+      "max": 224993.0625,
+      "p999": 130040.84949218835,
+      "mean": 21449.54296875,
+      "median": 16982.3359375
+    },
+    {
+      "split": "train",
+      "local_idx": 29,
+      "global_seen_idx": 29,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000406_carotid_train_patch005.h5",
+      "scale": 191694.0,
+      "max": 199017.75,
+      "p999": 168703.0991406252,
+      "mean": 25735.61328125,
+      "median": 16590.5390625
+    },
+    {
+      "split": "train",
+      "local_idx": 64,
+      "global_seen_idx": 64,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000413_carotid_train_patch005.h5",
+      "scale": 185487.75,
+      "max": 198819.953125,
+      "p999": 122522.91183594092,
+      "mean": 16373.6357421875,
+      "median": 13570.06005859375
+    },
+    {
+      "split": "train",
+      "local_idx": 599,
+      "global_seen_idx": 599,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000350_muscle_train_patch005.h5",
+      "scale": 181292.09375,
+      "max": 195005.453125,
+      "p999": 120260.53476562577,
+      "mean": 19747.357421875,
+      "median": 16620.9033203125
+    },
+    {
+      "split": "train",
+      "local_idx": 294,
+      "global_seen_idx": 294,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000459_carotid_train_patch005.h5",
+      "scale": 187801.25,
+      "max": 192081.78125,
+      "p999": 136903.65843750333,
+      "mean": 17015.76171875,
+      "median": 12389.89990234375
+    },
+    {
+      "split": "train",
+      "local_idx": 591,
+      "global_seen_idx": 591,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000349_muscle_train_patch002.h5",
+      "scale": 184347.578125,
+      "max": 191528.96875,
+      "p999": 143218.86328125154,
+      "mean": 19637.216796875,
+      "median": 16321.5146484375
+    },
+    {
+      "split": "train",
+      "local_idx": 151,
+      "global_seen_idx": 151,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000431_carotid_train_patch002.h5",
+      "scale": 179928.609375,
+      "max": 186020.453125,
+      "p999": 143151.5139843757,
+      "mean": 20202.720703125,
+      "median": 16518.0615234375
+    },
+    {
+      "split": "train",
+      "local_idx": 158,
+      "global_seen_idx": 158,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000432_carotid_train_patch004.h5",
+      "scale": 163939.875,
+      "max": 185523.703125,
+      "p999": 144497.12687500106,
+      "mean": 25397.099609375,
+      "median": 17835.177734375
+    },
+    {
+      "split": "train",
+      "local_idx": 276,
+      "global_seen_idx": 276,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000456_carotid_train_patch002.h5",
+      "scale": 178478.21875,
+      "max": 181213.140625,
+      "p999": 148254.3255468757,
+      "mean": 11711.9130859375,
+      "median": 7128.869140625
+    },
+    {
+      "split": "train",
+      "local_idx": 657,
+      "global_seen_idx": 657,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000362_muscle_train_patch003.h5",
+      "scale": 177576.09375,
+      "max": 180512.09375,
+      "p999": 148358.23320312524,
+      "mean": 19766.48828125,
+      "median": 15910.93505859375
+    },
+    {
+      "split": "val",
+      "local_idx": 41,
+      "global_seen_idx": 1091,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/val/carotid/RF000479_carotid_val_patch002.h5",
+      "scale": 174321.0,
+      "max": 179462.640625,
+      "p999": 145153.21203125003,
+      "mean": 23128.291015625,
+      "median": 18121.6025390625
+    },
+    {
+      "split": "val",
+      "local_idx": 91,
+      "global_seen_idx": 1141,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/val/muscle/RF000374_muscle_val_patch002.h5",
+      "scale": 172607.0625,
+      "max": 179269.03125,
+      "p999": 144611.0828906256,
+      "mean": 18387.76953125,
+      "median": 14480.07568359375
+    },
+    {
+      "split": "train",
+      "local_idx": 212,
+      "global_seen_idx": 212,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/carotid/RF000443_carotid_train_patch003.h5",
+      "scale": 177161.765625,
+      "max": 178128.5625,
+      "p999": 125272.77117187521,
+      "mean": 21283.990234375,
+      "median": 16996.8994140625
+    },
+    {
+      "split": "train",
+      "local_idx": 407,
+      "global_seen_idx": 407,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000312_muscle_train_patch003.h5",
+      "scale": 169668.5625,
+      "max": 174861.703125,
+      "p999": 119759.78781250078,
+      "mean": 19209.001953125,
+      "median": 16156.1376953125
+    },
+    {
+      "split": "val",
+      "local_idx": 90,
+      "global_seen_idx": 1140,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/val/muscle/RF000374_muscle_val_patch001.h5",
+      "scale": 166381.46875,
+      "max": 168742.625,
+      "p999": 130096.33667968799,
+      "mean": 16674.5625,
+      "median": 11659.1962890625
+    },
+    {
+      "split": "train",
+      "local_idx": 624,
+      "global_seen_idx": 624,
+      "category": "muscle",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/train/muscle/RF000355_muscle_train_patch005.h5",
+      "scale": 162093.046875,
+      "max": 168528.046875,
+      "p999": 136761.29226562637,
+      "mean": 12603.9140625,
+      "median": 7272.300537109375
+    },
+    {
+      "split": "test",
+      "local_idx": 60,
+      "global_seen_idx": 1335,
+      "category": "carotid",
+      "path": "/media/liujia/rf_pipeline/64x32x32/02_h5_patches/test/carotid/RF000498_carotid_test_patch001.h5",
+      "scale": 157751.921875,
+      "max": 166159.65625,
+      "p999": 126579.04527343936,
+      "mean": 13071.6533203125,
+      "median": 8581.7783203125
+    }
+  ],
+  "elapsed_sec": 6.0537896156311035,
+  "max_over_p999": 4.012836219038384
+}

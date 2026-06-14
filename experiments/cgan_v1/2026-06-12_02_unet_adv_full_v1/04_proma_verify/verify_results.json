@@ -1,0 +1,78 @@
+{
+  "single_variable": {
+    "status": "PASS",
+    "detail": "Only epochs/snapshot/checkpoint changed; extra PROBE paths + evalfixed redline are diagnostic-only"
+  },
+  "d_health": {
+    "status": "WARN",
+    "proma": {
+      "D_real": 0.4663,
+      "D_fake": 0.5356,
+      "G_adv": 0.3676,
+      "D_loss": 0.6604
+    },
+    "csv": {
+      "D_real": 0.6228,
+      "D_fake": 0.5907,
+      "G_adv": 0.505,
+      "D_loss": 0.3013
+    },
+    "abs_diffs": {
+      "D_real": 0.15643,
+      "D_fake": 0.05509,
+      "G_adv": 0.13744
+    }
+  },
+  "d_carotid": {
+    "D_real": 0.4718,
+    "D_fake": 0.5356,
+    "gap": -0.0638
+  },
+  "d_muscle": {
+    "D_real": 0.462,
+    "D_fake": 0.5356,
+    "gap": -0.0735
+  },
+  "d_phantom": {
+    "D_real": 0.4652,
+    "D_fake": 0.5356,
+    "gap": -0.0704
+  },
+  "phantom_speckle": {
+    "status": "INFO",
+    "pred_mean": 0.3579,
+    "pred_std": 0.0182,
+    "gt_mean": 0.4506,
+    "gt_std": 0.1126,
+    "samples": 8,
+    "space": "B-mode [0,1]"
+  },
+  "supervised_loss": {
+    "status": "PASS",
+    "lambda_ssim": 0.84,
+    "lambda_l1": 0.16,
+    "ssim_3d": true,
+    "win_size": 7,
+    "data_range": 1.0
+  },
+  "adversarial_params": {
+    "status": "PASS",
+    "lambda_adv": 0.1,
+    "D_ndf": 48,
+    "lr": 0.0002,
+    "beta": [
+      0.5,
+      0.999
+    ]
+  },
+  "fft": {
+    "status": "PASS",
+    "pred_ratio": 16.84,
+    "gt_ratio": 5.8
+  },
+  "_meta": {
+    "ts": "2026-06-13 10:50:44 +0800",
+    "elapsed": 24.2,
+    "ckpt": "epoch025.pt"
+  }
+}

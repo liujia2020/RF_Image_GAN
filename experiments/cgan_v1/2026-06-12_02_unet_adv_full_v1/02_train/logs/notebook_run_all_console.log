@@ -1,0 +1,168 @@
+[NbConvertApp] Converting notebook train.ipynb to notebook
+/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  validate(nb)
+Traceback (most recent call last):
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/bin/jupyter-nbconvert", line 6, in <module>
+    sys.exit(main())
+  File "/home/liujia/.local/lib/python3.10/site-packages/jupyter_core/application.py", line 284, in launch_instance
+    super().launch_instance(argv=argv, **kwargs)
+  File "/home/liujia/.local/lib/python3.10/site-packages/traitlets/config/application.py", line 1082, in launch_instance
+    app.start()
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/nbconvertapp.py", line 420, in start
+    self.convert_notebooks()
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/nbconvertapp.py", line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/nbconvertapp.py", line 563, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/nbconvertapp.py", line 487, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/exporters/exporter.py", line 201, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/exporters/exporter.py", line 220, in from_file
+    return self.from_notebook_node(
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/exporters/notebook.py", line 36, in from_notebook_node
+    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/exporters/exporter.py", line 154, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/exporters/exporter.py", line 353, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/preprocessors/base.py", line 48, in __call__
+    return self.preprocess(nb, resources)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/preprocessors/execute.py", line 103, in preprocess
+    self.preprocess_cell(cell, resources, index)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbconvert/preprocessors/execute.py", line 124, in preprocess_cell
+    cell = self.execute_cell(cell, index, store_history=True)
+  File "/home/liujia/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/liujia/miniconda3/envs/rf-cgan-clean/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+cell5 = train.cell5_train(config, data_state, model_state)
+print(json.dumps(cell5, indent=2, ensure_ascii=False))
+
+------------------
+
+----- stdout -----
+EPOCH 001/50 loss=0.884442 ssim=0.094261 l1=0.185134 pred_std=0.154790 d_loss=0.354810 d_real_sig=0.6697 d_fake_sig=0.5652 g_adv=0.939998 val_loss=0.750444 bn_var=12826.984571 seconds=652.1
+----- stdout -----
+EPOCH 002/50 loss=0.860179 ssim=0.103934 l1=0.137255 pred_std=0.166726 d_loss=0.132509 d_real_sig=0.6898 d_fake_sig=0.5448 g_adv=0.855224 val_loss=0.760200 bn_var=13254.970235 seconds=514.8
+----- stdout -----
+EPOCH 003/50 loss=0.869873 ssim=0.091441 l1=0.135088 pred_std=0.171591 d_loss=0.117297 d_real_sig=0.6905 d_fake_sig=0.5468 g_adv=0.850692 val_loss=0.775325 bn_var=14241.347802 seconds=525.9
+----- stdout -----
+EPOCH 004/50 loss=0.856444 ssim=0.099131 l1=0.127989 pred_std=0.160852 d_loss=0.158594 d_real_sig=0.6712 d_fake_sig=0.5674 g_adv=0.792358 val_loss=0.777945 bn_var=15172.415803 seconds=628.2
+----- stdout -----
+EPOCH 005/50 loss=0.837554 ssim=0.116450 l1=0.116421 pred_std=0.154498 d_loss=0.161681 d_real_sig=0.6677 d_fake_sig=0.5718 g_adv=0.767441 val_loss=0.786704 bn_var=16213.606438 seconds=569.6
+----- stdout -----
+EPOCH 006/50 loss=0.833831 ssim=0.120406 l1=0.114492 pred_std=0.154814 d_loss=0.149489 d_real_sig=0.6713 d_fake_sig=0.5676 g_adv=0.766537 val_loss=0.783869 bn_var=17187.675611 seconds=673.7
+----- stdout -----
+EPOCH 007/50 loss=0.834925 ssim=0.125114 l1=0.113228 pred_std=0.155687 d_loss=0.164824 d_real_sig=0.6721 d_fake_sig=0.5653 g_adv=0.819040 val_loss=0.783226 bn_var=18271.417940 seconds=583.1
+----- stdout -----
+EPOCH 008/50 loss=0.827720 ssim=0.130356 l1=0.113085 pred_std=0.154653 d_loss=0.160490 d_real_sig=0.6738 d_fake_sig=0.5643 g_adv=0.791258 val_loss=0.786536 bn_var=19165.894084 seconds=677.5
+----- stdout -----
+EPOCH 009/50 loss=0.832571 ssim=0.130890 l1=0.113113 pred_std=0.151692 d_loss=0.145690 d_real_sig=0.6785 d_fake_sig=0.5589 g_adv=0.844206 val_loss=0.789701 bn_var=19987.217373 seconds=529.5
+----- stdout -----
+EPOCH 010/50 loss=0.836967 ssim=0.127712 l1=0.115571 pred_std=0.154261 d_loss=0.157756 d_real_sig=0.6755 d_fake_sig=0.5619 g_adv=0.857535 val_loss=0.794354 bn_var=20905.547631 seconds=511.5
+----- stdout -----
+EPOCH 011/50 loss=0.832105 ssim=0.127859 l1=0.115347 pred_std=0.154864 d_loss=0.183370 d_real_sig=0.6690 d_fake_sig=0.5674 g_adv=0.810507 val_loss=0.795172 bn_var=21683.638951 seconds=582.8
+----- stdout -----
+EPOCH 012/50 loss=0.834346 ssim=0.128049 l1=0.114909 pred_std=0.153936 d_loss=0.178975 d_real_sig=0.6707 d_fake_sig=0.5665 g_adv=0.835217 val_loss=0.799670 bn_var=22448.405095 seconds=514.8
+----- stdout -----
+EPOCH 013/50 loss=0.833217 ssim=0.131612 l1=0.113448 pred_std=0.153497 d_loss=0.169553 d_real_sig=0.6738 d_fake_sig=0.5632 g_adv=0.856197 val_loss=0.796752 bn_var=23017.567853 seconds=572.1
+----- stdout -----
+EPOCH 014/50 loss=0.832518 ssim=0.135458 l1=0.112648 pred_std=0.154609 d_loss=0.166104 d_real_sig=0.6767 d_fake_sig=0.5595 g_adv=0.882790 val_loss=0.797604 bn_var=23603.371531 seconds=520.3
+----- stdout -----
+EPOCH 015/50 loss=0.825695 ssim=0.139951 l1=0.111878 pred_std=0.154725 d_loss=0.159794 d_real_sig=0.6798 d_fake_sig=0.5557 g_adv=0.853529 val_loss=0.799998 bn_var=24160.811745 seconds=588.6
+----- stdout -----
+EPOCH 016/50 loss=0.825803 ssim=0.142240 l1=0.111261 pred_std=0.154122 d_loss=0.146203 d_real_sig=0.6845 d_fake_sig=0.5509 g_adv=0.874832 val_loss=0.793696 bn_var=24769.387386 seconds=561.4
+----- stdout -----
+EPOCH 017/50 loss=0.827344 ssim=0.143123 l1=0.111389 pred_std=0.153046 d_loss=0.148332 d_real_sig=0.6849 d_fake_sig=0.5496 g_adv=0.897451 val_loss=0.795783 bn_var=25541.644112 seconds=689.7
+----- stdout -----
+EPOCH 018/50 loss=0.825684 ssim=0.145249 l1=0.111063 pred_std=0.153720 d_loss=0.144985 d_real_sig=0.6866 d_fake_sig=0.5481 g_adv=0.899233 val_loss=0.799366 bn_var=26127.940190 seconds=540.9
+----- stdout -----
+EPOCH 019/50 loss=0.829376 ssim=0.145283 l1=0.111829 pred_std=0.154138 d_loss=0.140155 d_real_sig=0.6889 d_fake_sig=0.5458 g_adv=0.935213 val_loss=0.803608 bn_var=26694.729374 seconds=510.2
+----- stdout -----
+EPOCH 020/50 loss=0.824498 ssim=0.146918 l1=0.110322 pred_std=0.154826 d_loss=0.139590 d_real_sig=0.6888 d_fake_sig=0.5451 g_adv=0.902573 val_loss=0.801893 bn_var=27231.598556 seconds=676.8
+----- stdout -----
+EPOCH 021/50 loss=0.825675 ssim=0.148416 l1=0.111060 pred_std=0.156174 d_loss=0.131117 d_real_sig=0.6908 d_fake_sig=0.5428 g_adv=0.925748 val_loss=0.802009 bn_var=27841.505017 seconds=581.6
+----- stdout -----
+EPOCH 022/50 loss=0.822845 ssim=0.151093 l1=0.110470 pred_std=0.155799 d_loss=0.134977 d_real_sig=0.6909 d_fake_sig=0.5430 g_adv=0.920883 val_loss=0.800928 bn_var=28366.141762 seconds=585.3
+----- stdout -----
+EPOCH 023/50 loss=0.825204 ssim=0.151853 l1=0.110300 pred_std=0.154868 d_loss=0.124987 d_real_sig=0.6955 d_fake_sig=0.5388 g_adv=0.951129 val_loss=0.804319 bn_var=28874.859430 seconds=552.9
+----- stdout -----
+EPOCH 024/50 loss=0.824337 ssim=0.152338 l1=0.109764 pred_std=0.155511 d_loss=0.127314 d_real_sig=0.6939 d_fake_sig=0.5394 g_adv=0.947385 val_loss=0.797879 bn_var=29448.628148 seconds=671.5
+----- stdout -----
+EPOCH 025/50 loss=0.823395 ssim=0.153413 l1=0.109543 pred_std=0.154727 d_loss=0.131815 d_real_sig=0.6922 d_fake_sig=0.5408 g_adv=0.947352 val_loss=0.797319 bn_var=30048.023591 seconds=626.5
+----- stdout -----
+EPOCH 026/50 loss=0.822388 ssim=0.155190 l1=0.109011 pred_std=0.154430 d_loss=0.132981 d_real_sig=0.6926 d_fake_sig=0.5408 g_adv=0.953064 val_loss=0.799123 bn_var=30550.675976 seconds=647.8
+----- stdout -----
+EPOCH 027/50 loss=0.823448 ssim=0.155887 l1=0.110102 pred_std=0.155359 d_loss=0.122210 d_real_sig=0.6955 d_fake_sig=0.5387 g_adv=0.967772 val_loss=0.797325 bn_var=30933.300030 seconds=681.1
+----- stdout -----
+EPOCH 028/50 loss=0.824056 ssim=0.156545 l1=0.109870 pred_std=0.157288 d_loss=0.112123 d_real_sig=0.6987 d_fake_sig=0.5358 g_adv=0.979752 val_loss=0.792627 bn_var=31379.860678 seconds=680.0
+----- stdout -----
+EPOCH 029/50 loss=0.825266 ssim=0.157491 l1=0.109310 pred_std=0.157434 d_loss=0.119951 d_real_sig=0.6957 d_fake_sig=0.5379 g_adv=1.000690 val_loss=0.800594 bn_var=31844.113364 seconds=601.6
+----- stdout -----
+EPOCH 030/50 loss=0.821879 ssim=0.158523 l1=0.108394 pred_std=0.155453 d_loss=0.117975 d_real_sig=0.6969 d_fake_sig=0.5362 g_adv=0.976950 val_loss=0.787030 bn_var=32260.926522 seconds=631.3
+----- stdout -----
+EPOCH 031/50 loss=0.824191 ssim=0.158967 l1=0.109128 pred_std=0.155229 d_loss=0.117980 d_real_sig=0.6960 d_fake_sig=0.5368 g_adv=1.002628 val_loss=0.799198 bn_var=32662.117371 seconds=648.3
+----- stdout -----
+EPOCH 032/50 loss=0.826447 ssim=0.158891 l1=0.109306 pred_std=0.157514 d_loss=0.112087 d_real_sig=0.6996 d_fake_sig=0.5343 g_adv=1.024265 val_loss=0.796688 bn_var=33058.911510 seconds=627.5
+----- stdout -----
+EPOCH 033/50 loss=0.828543 ssim=0.158994 l1=0.109428 pred_std=0.157487 d_loss=0.113184 d_real_sig=0.6987 d_fake_sig=0.5353 g_adv=1.045901 val_loss=0.790582 bn_var=33511.798094 seconds=586.9
+----- stdout -----
+EPOCH 034/50 loss=0.826112 ssim=0.160847 l1=0.108428 pred_std=0.155814 d_loss=0.114873 d_real_sig=0.6982 d_fake_sig=0.5350 g_adv=1.038745 val_loss=0.791241 bn_var=33949.009389 seconds=680.3
+----- stdout -----
+EPOCH 035/50 loss=0.823651 ssim=0.161780 l1=0.107857 pred_std=0.155023 d_loss=0.113038 d_real_sig=0.6989 d_fake_sig=0.5344 g_adv=1.022894 val_loss=0.794502 bn_var=34308.176445 seconds=677.8
+----- stdout -----
+EPOCH 036/50 loss=0.822636 ssim=0.162964 l1=0.108149 pred_std=0.154344 d_loss=0.104664 d_real_sig=0.7020 d_fake_sig=0.5322 g_adv=1.022214 val_loss=0.793181 bn_var=34675.198039 seconds=536.5
+----- stdout -----
+EPOCH 037/50 loss=0.824099 ssim=0.161818 l1=0.108866 pred_std=0.156048 d_loss=0.101617 d_real_sig=0.7013 d_fake_sig=0.5312 g_adv=1.026073 val_loss=0.790442 bn_var=35033.501659 seconds=616.7
+----- stdout -----
+EPOCH 038/50 loss=0.824284 ssim=0.162791 l1=0.108509 pred_std=0.158269 d_loss=0.100795 d_real_sig=0.7019 d_fake_sig=0.5305 g_adv=1.036676 val_loss=0.792416 bn_var=35454.897014 seconds=573.1
+----- stdout -----
+EPOCH 039/50 loss=0.822881 ssim=0.164133 l1=0.107374 pred_std=0.157268 d_loss=0.100564 d_real_sig=0.7021 d_fake_sig=0.5317 g_adv=1.035729 val_loss=0.794084 bn_var=35826.751844 seconds=607.0
+----- stdout -----
+EPOCH 040/50 loss=0.822883 ssim=0.165039 l1=0.107614 pred_std=0.157163 d_loss=0.098712 d_real_sig=0.7034 d_fake_sig=0.5310 g_adv=1.042974 val_loss=0.791782 bn_var=36199.316877 seconds=533.9
+----- stdout -----
+EPOCH 041/50 loss=0.822548 ssim=0.164835 l1=0.107906 pred_std=0.158617 d_loss=0.095030 d_real_sig=0.7046 d_fake_sig=0.5274 g_adv=1.037446 val_loss=0.790501 bn_var=36603.068255 seconds=559.0
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mRuntimeError[0m                              Traceback (most recent call last)
+Cell [0;32mIn[6], line 1[0m
+[0;32m----> 1[0m cell5 [38;5;241m=[39m [43mtrain[49m[38;5;241;43m.[39;49m[43mcell5_train[49m[43m([49m[43mconfig[49m[43m,[49m[43m [49m[43mdata_state[49m[43m,[49m[43m [49m[43mmodel_state[49m[43m)[49m
+[1;32m      2[0m [38;5;28mprint[39m(json[38;5;241m.[39mdumps(cell5, indent[38;5;241m=[39m[38;5;241m2[39m, ensure_ascii[38;5;241m=[39m[38;5;28;01mFalse[39;00m))
+
+File [0;32m/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/train.py:1051[0m, in [0;36mcell5_train[0;34m(config, data_state, model_state)[0m
+[1;32m   1049[0m rows[38;5;241m.[39mappend(row)
+[1;32m   1050[0m write_csv(METRICS_DIR [38;5;241m/[39m [38;5;124m"[39m[38;5;124mstability.csv[39m[38;5;124m"[39m, rows)
+[0;32m-> 1051[0m [43mcheck_redlines[49m[43m([49m[43mrow[49m[43m,[49m[43m [49m[43mconfig[49m[43m)[49m
+[1;32m   1052[0m generate_epoch_probes(
+[1;32m   1053[0m     epoch[38;5;241m=[39mepoch,
+[1;32m   1054[0m     model[38;5;241m=[39mmodel_state[[38;5;124m"[39m[38;5;124mG[39m[38;5;124m"[39m],
+[0;32m   (...)[0m
+[1;32m   1063[0m     val_out_dir[38;5;241m=[39mPROBE_VAL_DIR,
+[1;32m   1064[0m )
+[1;32m   1065[0m [38;5;28;01mif[39;00m epoch [38;5;129;01min[39;00m snapshot_epochs:
+
+File [0;32m/media/liujia/8CC24D13C24D02C6/code/RF_Image_GAN/experiments/cgan_v1/2026-06-12_02_unet_adv_full_v1/02_train/train.py:818[0m, in [0;36mcheck_redlines[0;34m(row, config)[0m
+[1;32m    816[0m     fake_flat [38;5;241m=[39m [38;5;28mabs[39m([38;5;28mfloat[39m(row[fake_key]) [38;5;241m-[39m [38;5;241m0.5[39m) [38;5;241m<[39m[38;5;241m=[39m eps
+[1;32m    817[0m     [38;5;28;01mif[39;00m real_flat [38;5;129;01mand[39;00m fake_flat:
+[0;32m--> 818[0m         [38;5;28;01mraise[39;00m [38;5;167;01mRuntimeError[39;00m(
+[1;32m    819[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mREDLINE: evalfixed D_real/D_fake sigmoid both near 0.5 at epoch [39m[38;5;132;01m{[39;00mepoch[38;5;132;01m}[39;00m[38;5;124m: [39m[38;5;124m"[39m
+[1;32m    820[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mreal=[39m[38;5;132;01m{[39;00m[38;5;28mfloat[39m(row[real_key])[38;5;132;01m:[39;00m[38;5;124m.4f[39m[38;5;132;01m}[39;00m[38;5;124m, fake=[39m[38;5;132;01m{[39;00m[38;5;28mfloat[39m(row[fake_key])[38;5;132;01m:[39;00m[38;5;124m.4f[39m[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m    821[0m         )
+[1;32m    823[0m [38;5;28;01mif[39;00m [38;5;28mfloat[39m(row[[38;5;124m"[39m[38;5;124md_loss_train[39m[38;5;124m"[39m]) [38;5;241m<[39m[38;5;241m=[39m [38;5;28mfloat[39m(adv_cfg[[38;5;124m"[39m[38;5;124md_loss_collapse_threshold[39m[38;5;124m"[39m]) [38;5;129;01mand[39;00m [38;5;28mfloat[39m(row[[38;5;124m"[39m[38;5;124mg_adv_train[39m[38;5;124m"[39m]) [38;5;241m>[39m[38;5;241m=[39m [38;5;28mfloat[39m(
+[1;32m    824[0m     adv_cfg[[38;5;124m"[39m[38;5;124mg_adv_explosion_threshold[39m[38;5;124m"[39m]
+[1;32m    825[0m ):
+[1;32m    826[0m     [38;5;28;01mraise[39;00m [38;5;167;01mRuntimeError[39;00m(
+[1;32m    827[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mREDLINE: train D_loss collapsed and G_adv exploded at epoch [39m[38;5;132;01m{[39;00mepoch[38;5;132;01m}[39;00m[38;5;124m: [39m[38;5;124m"[39m
+[1;32m    828[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124md_loss=[39m[38;5;132;01m{[39;00m[38;5;28mfloat[39m(row[[38;5;124m'[39m[38;5;124md_loss_train[39m[38;5;124m'[39m])[38;5;132;01m:[39;00m[38;5;124m.6g[39m[38;5;132;01m}[39;00m[38;5;124m, g_adv=[39m[38;5;132;01m{[39;00m[38;5;28mfloat[39m(row[[38;5;124m'[39m[38;5;124mg_adv_train[39m[38;5;124m'[39m])[38;5;132;01m:[39;00m[38;5;124m.6g[39m[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m    829[0m     )
+
+[0;31mRuntimeError[0m: REDLINE: evalfixed D_real/D_fake sigmoid both near 0.5 at epoch 42: real=0.4942, fake=0.5045
+

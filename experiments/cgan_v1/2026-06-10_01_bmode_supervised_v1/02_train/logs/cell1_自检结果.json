@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-06-10 00:25:01 +0800",
+  "rf_cache_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_random_full1500_fp16_cache_20260607",
+  "bmode_gt_dir": "/home/liujia/rf_training_cache/cgan_phase2a_64x32x32_bmode_gt_ref64407p58_20260610",
+  "available_memory_gb": 55.09806823730469,
+  "use_amp": false,
+  "num_workers": 0,
+  "batch_categories": [
+    "carotid",
+    "muscle",
+    "phantom"
+  ],
+  "batch_stats": {
+    "input": {
+      "shape": [
+        3,
+        1536,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": -9568.853515625,
+      "max": 10619.09375,
+      "mean": -0.020570039749145508,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "gt_bmode": {
+      "shape": [
+        3,
+        1,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": 0.0,
+      "max": 0.85205078125,
+      "mean": 0.5201820731163025,
+      "has_nan": false,
+      "has_inf": false
+    },
+    "baseline_bmode": {
+      "shape": [
+        3,
+        1,
+        64,
+        32,
+        32
+      ],
+      "dtype": "torch.float32",
+      "min": 0.0,
+      "max": 0.9604097604751587,
+      "mean": 0.6486425995826721,
+      "has_nan": false,
+      "has_inf": false
+    }
+  },
+  "pred_stats": {
+    "shape": [
+      3,
+      1,
+      64,
+      32,
+      32
+    ],
+    "min": 0.5,
+    "max": 0.5,
+    "mean": 0.5,
+    "has_nan": false,
+    "has_inf": false
+  },
+  "loss_probe": {
+    "loss": 0.7616170048713684,
+    "ssim": 0.11596377193927765,
+    "l1": 0.11891625821590424
+  },
+  "ssim_library": "pytorch-msssim",
+  "ssim_parameters": {
+    "library": "pytorch-msssim",
+    "class": "SSIM",
+    "spatial_dims": 3,
+    "scale": "single",
+    "win_size": 7,
+    "win_sigma": 1.5,
+    "data_range": 1.0,
+    "channel": 1,
+    "nonnegative_ssim": true
+  },
+  "status": "self_check_passed"
+}

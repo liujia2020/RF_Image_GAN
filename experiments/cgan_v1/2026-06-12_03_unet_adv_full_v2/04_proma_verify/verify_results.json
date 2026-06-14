@@ -1,0 +1,199 @@
+{
+  "single_variable": {
+    "verdict": "PASS",
+    "config_diff": "Only run_name, purpose description, health_basis: train, output paths changed. All training params identical.",
+    "train_py_diff": "3 lines in check_redlines (813,814,819): _evalfixed columns → _train columns. 1206/1209 lines identical.",
+    "unchanged_items": [
+      "Generator (Light3DUNet)",
+      "Discriminator (BMode3DPatchDiscriminator)",
+      "BN momentum=0.9",
+      "lambda_adv=0.1",
+      "lr=2e-4",
+      "beta1=0.5",
+      "beta2=0.999",
+      "batch=6",
+      "epochs=50",
+      "snapshot_epochs=[1,10,25,50]",
+      "checkpoint_epochs=[1,10,25,50]",
+      "seed=20260611",
+      "num_workers=0",
+      "use_amp=false",
+      "restore_input_scale=true",
+      "loss (0.84 SSIM3D + 0.16 L1 + 0.1 LSGAN)",
+      "data paths"
+    ]
+  },
+  "redline_logic": {
+    "verdict": "PASS",
+    "health_basis": "train-mode (d_real/fake_score_sigmoid_train)",
+    "checks": {
+      "reads_train_real": true,
+      "reads_train_fake": true,
+      "reads_evalfixed_real": false,
+      "reads_evalfixed_fake": false,
+      "flat_sigmoid_rule_present": true,
+      "d_loss_collapse_rule_present": true
+    }
+  },
+  "evalfixed_recomputation": {
+    "verdict": "PASS",
+    "proma": {
+      "D_real_sig": 0.49061,
+      "D_fake_sig": 0.51986,
+      "D_loss": 0.599832,
+      "G_adv": 0.906248
+    },
+    "csv": {
+      "D_real_sig": 0.4906136877834797,
+      "D_fake_sig": 0.5198585540056229,
+      "D_loss": 0.5998321622610092,
+      "G_adv": 0.9062860682606697
+    },
+    "diffs": {
+      "D_real_sig": -4e-06,
+      "D_fake_sig": 1e-06,
+      "D_loss": -0.0,
+      "G_adv": -3.8e-05
+    },
+    "max_abs_diff": 3.8e-05
+  },
+  "train_mode_range_check": {
+    "verdict": "FAIL",
+    "proma": {
+      "D_real_sig": 0.4906,
+      "D_fake_sig": 0.4942
+    },
+    "csv": {
+      "D_real_sig": 0.7080698187010629,
+      "D_fake_sig": 0.5237544979367937
+    },
+    "proma_gap": -0.0036,
+    "note": "Train mode uses current batch stats; exact values depend on sampled batch. Range consistency check only."
+  },
+  "eval_degradation": {
+    "key_epochs": {
+      "1": {
+        "epoch": 1,
+        "train_gap": 0.109,
+        "evalfixed_gap": 0.1444,
+        "train_D_real": 0.6719,
+        "evalfixed_D_real": 0.7235,
+        "train_D_fake": 0.5629,
+        "evalfixed_D_fake": 0.579,
+        "bn_running_var": 12719.0,
+        "val_ssim": 0.1083,
+        "val_pred_std": 0.109
+      },
+      "10": {
+        "epoch": 10,
+        "train_gap": 0.0969,
+        "evalfixed_gap": 0.0511,
+        "train_D_real": 0.6674,
+        "evalfixed_D_real": 0.5674,
+        "train_D_fake": 0.5705,
+        "evalfixed_D_fake": 0.5163,
+        "bn_running_var": 20711.0,
+        "val_ssim": 0.0681,
+        "val_pred_std": 0.1165
+      },
+      "25": {
+        "epoch": 25,
+        "train_gap": 0.151,
+        "evalfixed_gap": -0.0417,
+        "train_D_real": 0.692,
+        "evalfixed_D_real": 0.5986,
+        "train_D_fake": 0.541,
+        "evalfixed_D_fake": 0.6403,
+        "bn_running_var": 29805.0,
+        "val_ssim": 0.0656,
+        "val_pred_std": 0.1201
+      },
+      "50": {
+        "epoch": 50,
+        "train_gap": 0.1843,
+        "evalfixed_gap": -0.0292,
+        "train_D_real": 0.7081,
+        "evalfixed_D_real": 0.4906,
+        "train_D_fake": 0.5238,
+        "evalfixed_D_fake": 0.5199,
+        "bn_running_var": 39912.0,
+        "val_ssim": 0.0732,
+        "val_pred_std": 0.1211
+      }
+    },
+    "degradation_metrics": {
+      "evalfixed_gap_delta_e1_to_e50": 0.1736,
+      "train_gap_delta_e1_to_e50": 0.0753,
+      "bn_var_growth_factor": 3.1,
+      "evalfixed_first_zero_epoch": 21
+    }
+  },
+  "phantom_speckle": {
+    "proma_independent": {
+      "1": {
+        "pred_mean": 0.391,
+        "pred_std": 0.1171,
+        "gt_mean": 0.4506,
+        "gt_std": 0.1126,
+        "pred_mean_over_std": 3.34,
+        "gt_mean_over_std": 4.0
+      },
+      "10": {
+        "pred_mean": 0.4216,
+        "pred_std": 0.1077,
+        "gt_mean": 0.4506,
+        "gt_std": 0.1126,
+        "pred_mean_over_std": 3.91,
+        "gt_mean_over_std": 4.0
+      },
+      "25": {
+        "pred_mean": 0.4237,
+        "pred_std": 0.1162,
+        "gt_mean": 0.4506,
+        "gt_std": 0.1126,
+        "pred_mean_over_std": 3.65,
+        "gt_mean_over_std": 4.0
+      },
+      "50": {
+        "pred_mean": 0.4515,
+        "pred_std": 0.1183,
+        "gt_mean": 0.4506,
+        "gt_std": 0.1126,
+        "pred_mean_over_std": 3.82,
+        "gt_mean_over_std": 4.0
+      }
+    },
+    "csv_reference": {
+      "1": {
+        "pred_std": 0.08287417946849018,
+        "gt_std": 0.09576937090605497,
+        "pred_mean_over_std": "N/A"
+      },
+      "10": {
+        "pred_std": 0.09850006829947233,
+        "gt_std": 0.09576937090605497,
+        "pred_mean_over_std": "N/A"
+      },
+      "25": {
+        "pred_std": 0.102198526263237,
+        "gt_std": 0.09576937090605497,
+        "pred_mean_over_std": "N/A"
+      },
+      "50": {
+        "pred_std": 0.10189436376094818,
+        "gt_std": 0.09576937090605497,
+        "pred_mean_over_std": "N/A"
+      }
+    },
+    "note": "Proma uses 8 fixed phantom val samples (G.eval). CSV uses 225 full val phantom samples."
+  },
+  "_meta": {
+    "timestamp": "2026-06-13 23:24:49 +0800",
+    "elapsed_seconds": 32.1,
+    "run": "2026-06-12_03_unet_adv_full_v2",
+    "checkpoint": "epoch050.pt",
+    "n_evalfixed": 24,
+    "device": "cpu",
+    "pipeline": "restore_scale applied to input and baseline (corrected v2 pipeline)"
+  }
+}
